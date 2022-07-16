@@ -1,0 +1,544 @@
+@import '../function';
+
+.header {
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: adaptive-clamp(20, 40, 991.98);
+
+    padding-top: 40px;
+    padding-bottom: 56px;
+  }
+
+  &Logo {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &Nav {
+    &__list {
+      display: flex;
+      align-items: center;
+    }
+
+    &Item {
+      position: relative;
+
+      &Head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        position: relative;
+
+        overflow: hidden;
+
+        cursor: pointer;
+
+        border-radius: var(--default-border-radius) var(--default-border-radius) 0 0;
+
+        transition: box-shadow 0.4s ease;
+
+        a {
+          display: block;
+          padding: 10px 20px;
+        }
+
+        ._submenu & {
+          padding: 10px 20px;
+        }
+
+        &:after,
+        &:before {
+          content: '';
+
+          position: absolute;
+
+          width: 100%;
+        }
+
+        &:after {
+          bottom: 0;
+          left: -100%;
+
+          height: 2px;
+          background-color: var(--primary-orange-color-hsl);
+
+          transition: left 0.4s ease;
+        }
+
+        ._submenu & {
+          &:before {
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+
+            height: 100%;
+
+            background-color: var(--white-color-hsl);
+
+            transform: scale(0);
+
+            transition: transform 0.4s ease;
+          }
+        }
+
+        &__icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          transition: transform 0.4s ease;
+        }
+      }
+
+      &Submenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(30px);
+
+        transition: opacity 0.4s ease, visibility 0.4s ease,
+        box-shadow 0.4s ease, transform 0.4s ease;
+
+        &__list {
+          background-color: var(--white-color-hsl);
+
+          border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
+
+          overflow: hidden;
+        }
+
+        &__item {
+          a {
+            display: block;
+
+            padding: 10px 20px;
+
+            line-height: 20px;
+
+            transition: background-color 0.4s ease;
+
+            @media screen and (min-width: 991.98px) {
+              &:hover {
+                background-color: hsl(var(--base-primary-orange-color), 95%);
+              }
+            }
+
+            &:focus {
+              outline: none;
+
+              background-color: hsl(var(--base-primary-orange-color), 95%);
+            }
+          }
+        }
+      }
+
+      @media screen and (min-width: 991.98px) {
+        &:hover {
+          &._submenu {
+            .headerNavItemHead {
+              box-shadow: 0 0 5px rgba(black, 0.1);
+
+              &:after {
+                left: 0;
+              }
+
+              &:before {
+                transform: scale(1);
+              }
+
+              &__icon {
+                transform: rotate(180deg);
+              }
+            }
+          }
+
+          .headerNavItemHead:after {
+            left: 0;
+          }
+
+          .headerNavItemSubmenu {
+            opacity: 1;
+            visibility: visible;
+
+            transform: translateY(0);
+
+            &__list {
+              box-shadow: 0 0 5px rgba(black, 0.1);
+            }
+          }
+        }
+      }
+
+      &:focus-within {
+        outline: none;
+
+        &._submenu {
+          .headerNavItemHead {
+            box-shadow: 0 0 5px rgba(black, 0.1);
+
+            &:after {
+              left: 0;
+            }
+
+            &:before {
+              transform: scale(1);
+            }
+
+            &__icon {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        .headerNavItemHead:after {
+          left: 0;
+        }
+
+        .headerNavItemSubmenu {
+          opacity: 1;
+          visibility: visible;
+
+          transform: translateY(0);
+
+          &__list {
+            box-shadow: 0 0 5px rgba(black, 0.1);
+          }
+        }
+      }
+    }
+  }
+
+  &Search {
+    width: 100%;
+    max-width: 430px;
+    min-width: 250px;
+
+    &__inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    &Form {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      width: 100%;
+      min-height: 44px;
+      height: 1px;
+
+      background-color: var(--white-color-hsl);
+      box-shadow: 0 0 5px rgba(black, 0.1);
+
+      border-radius: var(--default-border-radius);
+
+      overflow: hidden;
+
+      &:after {
+        content: '';
+
+        position: absolute;
+        bottom: 0;
+        right: -100%;
+
+        width: 100%;
+        height: 2px;
+
+        background-color: var(--primary-orange-color-hsl);
+
+        transition: right 0.4s ease;
+      }
+
+      &._isInputSearchFocused {
+        &:after {
+          right: 0;
+        }
+      }
+
+      &__icon {
+        button {
+          cursor: pointer;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          padding: 12px;
+
+          border: none;
+          background-color: transparent;
+
+          &:focus {
+            outline: none;
+
+            background-color: hsl(var(--base-default-color), 95%);
+          }
+        }
+      }
+
+      &__close {
+        opacity: 0;
+        visibility: hidden;
+
+        transition: opacity .3s ease, visibility .3s ease;
+
+        ._isInputSearchTyping & {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        button {
+          cursor: pointer;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          padding: 12px;
+
+          border: none;
+          background-color: transparent;
+
+          &:focus {
+            outline: none;
+
+            background-color: hsl(var(--base-default-color), 95%);
+          }
+
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+
+      &__input {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+
+        ._isInputSearchTyping & {
+          label {
+            left: 25px;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: left 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+          }
+        }
+
+        label {
+          pointer-events: none;
+
+          position: absolute;
+          top: 50%;
+          left: 0;
+
+          transform: translateY(-50%);
+
+          transition: left 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        input {
+          width: 100%;
+          height: 100%;
+
+          padding: 12px 0;
+
+          border: none;
+          background-color: transparent;
+
+          transition: padding 0.4s ease;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+
+    &Results {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: -1;
+
+      width: 95%;
+
+      transform: translateX(-50%);
+
+      transition: top 0.3s ease;
+
+      &._isResultsListShow {
+        top: 100%;
+      }
+
+      &__list {
+        overflow: auto;
+
+        min-height: 36px;
+        max-height: 216px;
+
+        opacity: 0;
+        visibility: hidden;
+
+        background-color: var(--white-color-hsl);
+
+        box-shadow: 0 0 5px rgba(black, 0.1);
+
+        border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
+
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: hsl(var(--base-primary-orange-color), 75%);
+          border-radius: 40px;
+        }
+
+
+        ._isResultsListShow & {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &__item {
+        @keyframes show {
+          0% {
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 1;
+          }
+        }
+
+        animation: show .4s ease forwards;
+
+        &._loader {
+          @keyframes loading {
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          padding: 10px;
+
+          svg {
+            animation: 2s linear 0s normal none infinite running loading;
+          }
+        }
+
+        &._notFound {
+          padding: 10px 20px;
+        }
+
+        &._errorMessage {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 10px 20px;
+
+          background-color: var(--red-color-hsl);
+
+          span {
+            svg {
+              width: 20px;
+            }
+
+          }
+        }
+
+        a {
+          padding: 10px 20px;
+
+          transition: background-color 0.4s ease;
+
+          @media screen and (min-width: 991.98px) {
+            &:hover {
+              background-color: hsl(var(--base-primary-orange-color), 95%);
+            }
+          }
+
+          &:focus {
+            outline: none;
+
+            background-color: hsl(var(--base-primary-orange-color), 95%);
+          }
+        }
+      }
+    }
+  }
+
+  &Actions {
+    flex: 1 1 auto;
+
+    &__list {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: adaptive-clamp(15, 22, 991.98);
+    }
+
+    &__item {
+      a {
+        display: block;
+        padding: 10px;
+      }
+
+      &:last-child {
+        border-radius: 100%;
+
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 100%;
+        }
+      }
+    }
+  }
+}
+
+._submenu {
+}
+
+._isInputSearchFocused {
+}
+
+._isInputSearchTyping {
+}
+
+._isResultsListShow {
+}
+
+._loader {
+}
+
+._notFound {
+}
+
+._errorMessage {
+}

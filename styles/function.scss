@@ -1,0 +1,35 @@
+@function relative-clamp-width($minValue, $maxValue, $minWidth, $maxWidth) {
+  @return calc((100 * ($maxValue - $minValue) / ($maxWidth - $minWidth)));
+}
+
+@function relative-clamp-value($minValue, $maxValue, $minWidth, $maxWidth) {
+  @return calc(
+    (($minWidth * $maxValue - $maxWidth * $minValue) / ($minWidth - $maxWidth)) /
+    16
+  );
+}
+
+@function adaptive-clamp(
+  $minValue,
+  $maxValue,
+  $minWidth: 320,
+  $maxWidth: 1920
+) {
+  $relativeWidth: relative-clamp-width(
+      $minValue,
+      $maxValue,
+      $minWidth,
+      $maxWidth
+  );
+  $relativeValue: relative-clamp-value(
+      $minValue,
+      $maxValue,
+      $minWidth,
+      $maxWidth
+  );
+  @return clamp(
+    #{$minValue + px},
+    #{$relativeWidth + vw} + #{$relativeValue + rem},
+    #{$maxValue + px}
+  );
+}
