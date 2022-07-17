@@ -10,7 +10,7 @@ interface IMainLayoutProps extends IChildrenProps {
 
 export const MainLayout = ({
                              children,
-                             title = 'Document'
+                             title = 'Funiro shop'
                            }: IMainLayoutProps) => {
   return (
     <>

@@ -5,6 +5,7 @@ import { setStaticClasses } from '../lib/classes.lib'
 import { HeaderNav } from './HeaderNav'
 import { HeaderSearch } from './HeaderSearch'
 import { HeaderActions } from './HeaderActions'
+import { HeaderBurger } from './HeaderBurder'
 
 import styles from '../styles/modules/Header.module.scss'
 
@@ -17,6 +18,7 @@ const Header = () => {
   return (
     <header className={ header }>
       <div className={ setStaticClasses([header__inner, '_container']) }>
+        <HeaderBurger/>
         <div className={ headerLogo }><Link href="/"><a>Funiro.</a></Link></div>
         <HeaderNav/>
         <HeaderSearch/>

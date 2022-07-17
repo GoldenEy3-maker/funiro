@@ -1,19 +1,75 @@
 @import '../function';
 
 .header {
+  --elements-padding: 13px;
+
   &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: adaptive-clamp(20, 40, 991.98);
 
-    padding-top: 40px;
-    padding-bottom: 56px;
+    padding-top: adaptive-clamp(5, 40, 991.98);
   }
 
   &Logo {
-    font-size: 24px;
-    font-weight: 700;
+    a {
+      font-size: 24px;
+      font-weight: 700;
+
+      padding: var(--elements-padding);
+    }
+
+    @media (max-width: 991.98px) {
+      display: none;
+    }
+  }
+
+  &Burger {
+
+    &__btn {
+      cursor: pointer;
+
+      position: relative;
+
+      width: 45px;
+      height: 45px;
+
+      background-color: transparent;
+      border: none;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      &:after,
+      &:before {
+        content: '';
+
+        display: block;
+
+        width: calc(100% - var(--elements-padding));
+        height: 2px;
+
+        background-color: var(--black-color-hsl);
+      }
+
+      span {
+        display: block;
+
+        width: calc(100% - var(--elements-padding));
+        height: 2px;
+
+        background-color: var(--black-color-hsl);
+      }
+    }
+
+    @media screen and (min-width: 991.89px) {
+      display: none;
+    }
   }
 
   &Nav {
@@ -42,11 +98,11 @@
 
         a {
           display: block;
-          padding: 10px 20px;
+          padding: var(--elements-padding) 15px;
         }
 
         ._submenu & {
-          padding: 10px 20px;
+          padding: var(--elements-padding) 15px;
         }
 
         &:after,
@@ -118,11 +174,15 @@
 
         &__item {
           a {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
             display: block;
 
-            padding: 10px 20px;
+            padding: var(--elements-padding) 20px;
 
-            line-height: 20px;
+            line-height: 25px;
 
             transition: background-color 0.4s ease;
 
@@ -215,11 +275,16 @@
         }
       }
     }
+
+    @media (max-width: 991.98px) {
+      display: none;
+    }
   }
 
   &Search {
-    width: 100%;
-    max-width: 430px;
+    flex: 1 1 100%;
+
+    max-width: 470px;
     min-width: 250px;
 
     &__inner {
@@ -234,8 +299,6 @@
       align-items: center;
 
       width: 100%;
-      min-height: 44px;
-      height: 1px;
 
       background-color: var(--white-color-hsl);
       box-shadow: 0 0 5px rgba(black, 0.1);
@@ -266,6 +329,7 @@
       }
 
       &__icon {
+
         button {
           cursor: pointer;
 
@@ -273,7 +337,7 @@
           align-items: center;
           justify-content: center;
 
-          padding: 12px;
+          padding: 15px 10px 15px 15px;
 
           border: none;
           background-color: transparent;
@@ -304,7 +368,7 @@
           align-items: center;
           justify-content: center;
 
-          padding: 12px;
+          padding: 15px 15px 15px 10px;
 
           border: none;
           background-color: transparent;
@@ -346,7 +410,13 @@
           top: 50%;
           left: 0;
 
+          width: 100%;
+
           transform: translateY(-50%);
+
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
 
           transition: left 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
         }
@@ -355,7 +425,7 @@
           width: 100%;
           height: 100%;
 
-          padding: 12px 0;
+          padding: 14.5px 0;
 
           border: none;
           background-color: transparent;
@@ -388,7 +458,7 @@
       &__list {
         overflow: auto;
 
-        min-height: 36px;
+        min-height: 44px;
         max-height: 216px;
 
         opacity: 0;
@@ -450,7 +520,7 @@
         }
 
         &._notFound {
-          padding: 10px 20px;
+          padding: var(--elements-padding) 20px;
         }
 
         &._errorMessage {
@@ -458,7 +528,7 @@
           align-items: center;
           justify-content: space-between;
 
-          padding: 10px 20px;
+          padding: var(--elements-padding) 20px;
 
           background-color: var(--red-color-hsl);
 
@@ -471,7 +541,11 @@
         }
 
         a {
-          padding: 10px 20px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          padding: var(--elements-padding) 20px;
 
           transition: background-color 0.4s ease;
 
@@ -489,6 +563,14 @@
         }
       }
     }
+
+    @media (max-width: 991.98px) {
+      max-width: none;
+    }
+
+    @media (max-width: 675px) {
+      display: none;
+    }
   }
 
   &Actions {
@@ -498,13 +580,13 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: adaptive-clamp(15, 22, 991.98);
+      gap: adaptive-clamp(9, 16, 991.98);
     }
 
     &__item {
       a {
         display: block;
-        padding: 10px;
+        padding: var(--elements-padding);
       }
 
       &:last-child {
@@ -518,6 +600,26 @@
           border-radius: 100%;
         }
       }
+
+      &._search {
+        display: none;
+
+        cursor: pointer;
+
+        padding: var(--elements-padding);
+      }
+
+      @media (max-width: 675px) {
+        display: none;
+
+        &._search {
+          display: block;
+        }
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      flex: 0 1 auto;
     }
   }
 }
@@ -541,4 +643,7 @@
 }
 
 ._errorMessage {
+}
+
+._search {
 }
