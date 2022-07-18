@@ -1,9 +1,11 @@
-import { EEndpointPath, EQueryString } from '../typescript/enum'
+import { EEndpointPath } from '../typescript/enum'
 import { IProductsData } from '../typescript/interface'
 
 import Link from 'next/link'
 
-import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react'
+import { ChangeEventHandler, useCallback, useRef, useState } from 'react'
+
+import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
 
 import { useHttp } from '../hooks/http.hook'
 import { useDebounceFunction } from '../hooks/debounce.hook'
@@ -11,8 +13,6 @@ import { useDebounceFunction } from '../hooks/debounce.hook'
 import { setDynamicClasses, setStaticClasses } from '../lib/classes.lib'
 
 import styles from '../styles/modules/Header.module.scss'
-import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
-import { useRouter } from 'next/router'
 
 const {
   headerSearch,
@@ -44,7 +44,6 @@ export const HeaderSearch = () => {
 
   const headerSearchInputRef = useRef<HTMLInputElement>(null)
 
-  const router = useRouter()
   const { request, isRequestInProcess } = useHttp()
   const [requestDebouncedSearch, requestDebouncedSearchClear] = useDebounceFunction()
   const [clearDebouncedResults] = useDebounceFunction()
@@ -98,21 +97,10 @@ export const HeaderSearch = () => {
     if (headerSearchInputRef.current) headerSearchInputRef.current.focus()
   }
 
-  const backReturnButtonHandler = useCallback(() => {
+  const clickReturnButtonHandler = useCallback(() => {
     resetSearchInput()
     closeHeaderMobileSearchHandler()
   }, [resetSearchInput, closeHeaderMobileSearchHandler])
-
-  useEffect(() => {
-    const returnButtonHandler = () => {
-      if (router.query[EQueryString.headerSearch])
-        backReturnButtonHandler()
-    }
-
-    window.addEventListener('popstate', returnButtonHandler)
-
-    return () => window.removeEventListener('popstate', returnButtonHandler)
-  }, [router, backReturnButtonHandler])
 
   return (
     <div className={ headerSearch }>
@@ -143,7 +131,7 @@ export const HeaderSearch = () => {
                 />
               </svg>
             </button>
-            <button type="button" className={ returnBtn } onClick={ backReturnButtonHandler }>
+            <button type="button" className={ returnBtn } onClick={ clickReturnButtonHandler }>
               <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h48v48h-48z" fill="none"/>
                 <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>

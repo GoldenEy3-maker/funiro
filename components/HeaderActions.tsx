@@ -1,11 +1,5 @@
-import { EQueryString } from '../typescript/enum'
-
 import Link from 'next/link'
 import Image from 'next/image'
-
-import { useRouter } from 'next/router'
-
-import { useEffect } from 'react'
 
 import { setStaticClasses } from '../lib/classes.lib'
 
@@ -22,14 +16,7 @@ const {
 } = styles
 
 export const HeaderActions = () => {
-  const { openHeaderMobileSearchHandler, closeHeaderMobileSearchHandler } = useHeaderMobileSearchContext()
-
-
-  const clickSearchButtonHandler = () => {
-    openHeaderMobileSearchHandler()
-  }
-
-
+  const { openHeaderMobileSearchHandler } = useHeaderMobileSearchContext()
 
   return (
     <div className={ headerActions }>
@@ -61,7 +48,7 @@ export const HeaderActions = () => {
           </a></Link>
         </li>
         <li className={ setStaticClasses([headerActions__item, _search]) } tabIndex={ 0 }
-            onClick={ clickSearchButtonHandler }>
+            onClick={ openHeaderMobileSearchHandler }>
           <svg width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M16.6667 16.6667L12.5802 12.5802M12.5802 12.5802C13.5604 11.5999 14.1667 10.2458 14.1667 8.75C14.1667 5.75846 11.7416 3.33334 8.75004 3.33334C5.7585 3.33334 3.33337 5.75846 3.33337 8.75C3.33337 11.7415 5.7585 14.1667 8.75004 14.1667C10.2458 14.1667 11.6 13.5604 12.5802 12.5802Z"

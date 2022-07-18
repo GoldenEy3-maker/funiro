@@ -1,9 +1,3 @@
-import { EQueryString } from '../typescript/enum'
-
-import { useRouter } from 'next/router'
-
-import { useEffect } from 'react'
-
 import { HeaderSearch } from './HeaderSearch'
 
 import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
