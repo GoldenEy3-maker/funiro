@@ -1,9 +1,9 @@
-import { EEndpointPath } from '../typescript/enum'
+import { EEndpointPath, EQueryString } from '../typescript/enum'
 import { IProductsData } from '../typescript/interface'
 
 import Link from 'next/link'
 
-import { ChangeEventHandler, useRef, useState } from 'react'
+import { ChangeEventHandler, useCallback, useEffect, useRef, useState } from 'react'
 
 import { useHttp } from '../hooks/http.hook'
 import { useDebounceFunction } from '../hooks/debounce.hook'
@@ -12,6 +12,7 @@ import { setDynamicClasses, setStaticClasses } from '../lib/classes.lib'
 
 import styles from '../styles/modules/Header.module.scss'
 import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
+import { useRouter } from 'next/router'
 
 const {
   headerSearch,
@@ -39,13 +40,26 @@ export const HeaderSearch = () => {
   const [resultsData, setResultsData] = useState<IProductsData[] | null>(null)
   const [errorSearch, setErrorSearch] = useState<string | null>(null)
 
-  const headerSearchInputRef = useRef<HTMLInputElement>(null)
-
   const { closeHeaderMobileSearchHandler } = useHeaderMobileSearchContext()
 
+  const headerSearchInputRef = useRef<HTMLInputElement>(null)
+
+  const router = useRouter()
   const { request, isRequestInProcess } = useHttp()
   const [requestDebouncedSearch, requestDebouncedSearchClear] = useDebounceFunction()
   const [clearDebouncedResults] = useDebounceFunction()
+
+  const clearData = useCallback(() => {
+    if (resultsData) setResultsData(null)
+    if (errorSearch) setErrorSearch(null)
+  }, [resultsData, errorSearch])
+
+  const resetSearchInput = useCallback(() => {
+    setSearchValue('')
+    setIsInputFocused(false)
+    requestDebouncedSearchClear()
+    clearData()
+  }, [clearData, requestDebouncedSearchClear])
 
   const changeInputSearchHandler: ChangeEventHandler<HTMLInputElement> = (
     event
@@ -56,12 +70,7 @@ export const HeaderSearch = () => {
 
     if (value === '') {
       requestDebouncedSearchClear()
-
-      clearDebouncedResults(() => {
-        if (resultsData) setResultsData(null)
-        if (errorSearch) setErrorSearch(null)
-      }, 300)
-
+      clearDebouncedResults(() => clearData(), 300)
       return
     }
 
@@ -84,28 +93,26 @@ export const HeaderSearch = () => {
 
   const blurInputSearchHandler = () => setIsInputFocused(searchValue !== '')
 
-  const clickCloseButtonHandler = () => {
-    setSearchValue('')
-    setIsInputFocused(false)
-    requestDebouncedSearchClear()
-    if (resultsData) setResultsData(null)
-    if (errorSearch) setErrorSearch(null)
-  }
-
   const clickHeaderSearchIconButtonHandler = () => {
     if (searchValue) return
-
     if (headerSearchInputRef.current) headerSearchInputRef.current.focus()
   }
 
-  const clickReturnButtonHandler = () => {
-    setSearchValue('')
-    setIsInputFocused(false)
-    requestDebouncedSearchClear()
-    if (resultsData) setResultsData(null)
-    if (errorSearch) setErrorSearch(null)
+  const backReturnButtonHandler = useCallback(() => {
+    resetSearchInput()
     closeHeaderMobileSearchHandler()
-  }
+  }, [resetSearchInput, closeHeaderMobileSearchHandler])
+
+  useEffect(() => {
+    const returnButtonHandler = () => {
+      if (router.query[EQueryString.headerSearch])
+        backReturnButtonHandler()
+    }
+
+    window.addEventListener('popstate', returnButtonHandler)
+
+    return () => window.removeEventListener('popstate', returnButtonHandler)
+  }, [router, backReturnButtonHandler])
 
   return (
     <div className={ headerSearch }>
@@ -136,7 +143,7 @@ export const HeaderSearch = () => {
                 />
               </svg>
             </button>
-            <button type="button" className={ returnBtn } onClick={ clickReturnButtonHandler }>
+            <button type="button" className={ returnBtn } onClick={ backReturnButtonHandler }>
               <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h48v48h-48z" fill="none"/>
                 <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
@@ -157,7 +164,7 @@ export const HeaderSearch = () => {
             />
           </div>
           <div className={ headerSearchForm__close }>
-            <button type="button" onClick={ clickCloseButtonHandler }>
+            <button type="button" onClick={ resetSearchInput }>
               <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000"
                    strokeLinecap="round" strokeLinejoin="round" strokeWidth="2px">
                 <title/>

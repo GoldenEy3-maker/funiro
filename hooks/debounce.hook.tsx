@@ -1,6 +1,6 @@
 import { TIntervalTimer } from '../typescript/type'
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface IDebounceStateHook {
   (value: any, delay?: number): any
@@ -39,11 +39,11 @@ export const useDebounceFunction: IDebounceFunctionHook = () => {
     }
   }
 
-  const debouncedFunction: IDebouncedFunction = (callback, delay) => {
+  const debouncedFunction: IDebouncedFunction = useCallback((callback, delay) => {
     clearTimeoutID()
 
     timeoutID.current = setTimeout(callback, delay)
-  }
+  }, [])
 
   return [debouncedFunction, clearTimeoutID]
 }

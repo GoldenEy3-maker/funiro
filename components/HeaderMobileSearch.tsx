@@ -15,21 +15,7 @@ import styles from '../styles/modules/Header.module.scss'
 const { headerMobileSearch, headerMobileSearch__inner, _isHeaderMobileSearchShow } = styles
 
 export const HeaderMobileSearch = () => {
-  const router = useRouter()
-
-  const { isHeaderMobileSearchShow, closeHeaderMobileSearchHandler } = useHeaderMobileSearchContext()
-
-  useEffect(() => {
-    const returnButtonHandler = () => {
-      if (router.query[EQueryString.headerSearch]) {
-        closeHeaderMobileSearchHandler()
-      }
-    }
-
-    window.addEventListener('popstate', returnButtonHandler)
-
-    return () => window.removeEventListener('popstate', returnButtonHandler)
-  }, [router, closeHeaderMobileSearchHandler])
+  const { isHeaderMobileSearchShow } = useHeaderMobileSearchContext()
 
   return (
     <div className={ setDynamicClasses({

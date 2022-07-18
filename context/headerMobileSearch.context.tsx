@@ -3,7 +3,7 @@ import { IChildrenProps } from '../typescript/interface'
 
 import { useRouter } from 'next/router'
 
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 
 interface IHeaderMobileSearchContext {
   isHeaderMobileSearchShow: boolean
@@ -18,16 +18,16 @@ export const HeaderMobileSearchContextProvider = ({ children }: IChildrenProps) 
 
   const router = useRouter()
 
-  const openHeaderMobileSearchHandler = () => {
+  const openHeaderMobileSearchHandler = useCallback(() => {
     router.push(`?${ EQueryString.headerSearch }=true`).then(r => r)
     setIsHeaderMobileSearchShow(true)
-  }
+  }, [router])
 
-  const closeHeaderMobileSearchHandler = () => {
+  const closeHeaderMobileSearchHandler = useCallback(() => {
     setIsHeaderMobileSearchShow(false)
 
     if (router.query[EQueryString.headerSearch]) router.back()
-  }
+  }, [router])
 
   return (
     <HeaderMobileSearchContext.Provider value={ {
