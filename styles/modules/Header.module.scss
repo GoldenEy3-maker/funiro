@@ -4,12 +4,14 @@
   --elements-padding: 13px;
 
   &__inner {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: adaptive-clamp(20, 40, 991.98);
 
-    padding-top: adaptive-clamp(5, 40, 991.98);
+    padding-top: adaptive-clamp(0, 40, 991.98);
   }
 
   &Logo {
@@ -33,7 +35,7 @@
       position: relative;
 
       width: 45px;
-      height: 45px;
+      height: 50px;
 
       background-color: transparent;
       border: none;
@@ -281,6 +283,38 @@
     }
   }
 
+  &MobileSearch {
+    display: none;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    width: 100%;
+    height: 100%;
+
+    &._isHeaderMobileSearchShow {
+      display: block;
+    }
+
+    &__inner {
+      position: relative;
+
+      width: 100%;
+
+      background-color: var(--white-color-hsl);
+
+      box-shadow: 0 0 5px rgba(black, 0.1);
+
+      border-bottom: 2px solid var(--primary-orange-color-hsl);
+    }
+
+    @media (min-width: 675px) {
+      display: none;
+    }
+  }
+
   &Search {
     flex: 1 1 100%;
 
@@ -290,6 +324,10 @@
     &__inner {
       position: relative;
       z-index: 2;
+
+      @media (max-width: 675px) {
+        position: static;
+      }
     }
 
     &Form {
@@ -299,37 +337,41 @@
       align-items: center;
 
       width: 100%;
+      height: 100%;
 
       background-color: var(--white-color-hsl);
-      box-shadow: 0 0 5px rgba(black, 0.1);
-
-      border-radius: var(--default-border-radius);
 
       overflow: hidden;
 
-      &:after {
-        content: '';
+      @media (min-width: 675px) {
+        border-radius: var(--default-border-radius);
 
-        position: absolute;
-        bottom: 0;
-        right: -100%;
+        box-shadow: 0 0 5px rgba(black, 0.1);
 
-        width: 100%;
-        height: 2px;
-
-        background-color: var(--primary-orange-color-hsl);
-
-        transition: right 0.4s ease;
-      }
-
-      &._isInputSearchFocused {
         &:after {
-          right: 0;
+          content: '';
+
+          position: absolute;
+          bottom: 0;
+          right: -100%;
+
+          width: 100%;
+          height: 2px;
+
+          background-color: var(--primary-orange-color-hsl);
+
+          transition: right 0.4s ease;
+        }
+
+        &._isInputSearchFocused {
+          &:after {
+            right: 0;
+          }
         }
       }
 
-      &__icon {
 
+      &__icon {
         button {
           cursor: pointer;
 
@@ -347,19 +389,43 @@
 
             background-color: hsl(var(--base-default-color), 95%);
           }
+
+          &.returnBtn {
+            display: none;
+
+            padding: 12px 10px 12px 12px;
+
+            svg {
+              width: 23px;
+              height: 23px;
+            }
+          }
+
+          @media (max-width: 675px) {
+            &.submitBtn {
+              display: none;
+            }
+
+            &.returnBtn {
+              display: block;
+            }
+          }
         }
       }
 
       &__close {
-        opacity: 0;
-        visibility: hidden;
+        @media (min-width: 675px) {
+          opacity: 0;
+          visibility: hidden;
 
-        transition: opacity .3s ease, visibility .3s ease;
+          transition: opacity .3s ease, visibility .3s ease;
 
-        ._isInputSearchTyping & {
-          opacity: 1;
-          visibility: visible;
+          ._isInputSearchTyping & {
+            opacity: 1;
+            visibility: visible;
+          }
         }
+
 
         button {
           cursor: pointer;
@@ -562,14 +628,24 @@
           }
         }
       }
+
+      @media (max-width: 675px) {
+        width: 100%;
+
+        &__list {
+          max-height: none;
+        }
+      }
     }
 
     @media (max-width: 991.98px) {
       max-width: none;
     }
 
-    @media (max-width: 675px) {
-      display: none;
+    &:not(.headerMobileSearch &) {
+      @media (max-width: 675px) {
+        display: none;
+      }
     }
   }
 
@@ -606,7 +682,7 @@
 
         cursor: pointer;
 
-        padding: var(--elements-padding);
+        padding: 8.5px 7.5px;
       }
 
       @media (max-width: 675px) {
@@ -646,4 +722,7 @@
 }
 
 ._search {
+}
+
+._isHeaderMobileSearchShow {
 }

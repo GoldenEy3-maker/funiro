@@ -6,13 +6,11 @@ import { HeaderNav } from './HeaderNav'
 import { HeaderSearch } from './HeaderSearch'
 import { HeaderActions } from './HeaderActions'
 import { HeaderBurger } from './HeaderBurder'
+import { HeaderMobileSearch } from './HeaderMobileSearch'
 
 import styles from '../styles/modules/Header.module.scss'
 
-const {
-  header, header__inner, headerLogo
-
-} = styles
+const { header, header__inner, headerLogo } = styles
 
 const Header = () => {
   return (
@@ -23,10 +21,10 @@ const Header = () => {
         <HeaderNav/>
         <HeaderSearch/>
         <HeaderActions/>
+        <HeaderMobileSearch/>
       </div>
     </header>
   )
 }
-
 
 export default Header

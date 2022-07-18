@@ -11,6 +11,7 @@ import { useDebounceFunction } from '../hooks/debounce.hook'
 import { setDynamicClasses, setStaticClasses } from '../lib/classes.lib'
 
 import styles from '../styles/modules/Header.module.scss'
+import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
 
 const {
   headerSearch,
@@ -27,7 +28,9 @@ const {
   _isResultsListShow,
   _notFound,
   _errorMessage,
-  _loader
+  _loader,
+  submitBtn,
+  returnBtn
 } = styles
 
 export const HeaderSearch = () => {
@@ -37,6 +40,8 @@ export const HeaderSearch = () => {
   const [errorSearch, setErrorSearch] = useState<string | null>(null)
 
   const headerSearchInputRef = useRef<HTMLInputElement>(null)
+
+  const { closeHeaderMobileSearchHandler } = useHeaderMobileSearchContext()
 
   const { request, isRequestInProcess } = useHttp()
   const [requestDebouncedSearch, requestDebouncedSearchClear] = useDebounceFunction()
@@ -83,14 +88,23 @@ export const HeaderSearch = () => {
     setSearchValue('')
     setIsInputFocused(false)
     requestDebouncedSearchClear()
-    setResultsData(null)
-    setErrorSearch(null)
+    if (resultsData) setResultsData(null)
+    if (errorSearch) setErrorSearch(null)
   }
 
-  const headerSearchIconButtonHandler = () => {
+  const clickHeaderSearchIconButtonHandler = () => {
     if (searchValue) return
 
     if (headerSearchInputRef.current) headerSearchInputRef.current.focus()
+  }
+
+  const clickReturnButtonHandler = () => {
+    setSearchValue('')
+    setIsInputFocused(false)
+    requestDebouncedSearchClear()
+    if (resultsData) setResultsData(null)
+    if (errorSearch) setErrorSearch(null)
+    closeHeaderMobileSearchHandler()
   }
 
   return (
@@ -104,7 +118,8 @@ export const HeaderSearch = () => {
           }) }
         >
           <div className={ headerSearchForm__icon }>
-            <button type={ searchValue ? 'submit' : 'button' } onClick={ headerSearchIconButtonHandler }>
+            <button type={ searchValue ? 'submit' : 'button' } className={ submitBtn }
+                    onClick={ clickHeaderSearchIconButtonHandler }>
               <svg
                 width="20"
                 height="20"
@@ -119,6 +134,12 @@ export const HeaderSearch = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
+              </svg>
+            </button>
+            <button type="button" className={ returnBtn } onClick={ clickReturnButtonHandler }>
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
               </svg>
             </button>
           </div>

@@ -1,13 +1,18 @@
+import { EQueryString } from '../typescript/enum'
+
 import Link from 'next/link'
 import Image from 'next/image'
+
 import { useRouter } from 'next/router'
 
 import { useEffect } from 'react'
 
-import AvatarImage from '../public/images/avatar.png'
+import { setStaticClasses } from '../lib/classes.lib'
 
 import styles from '../styles/modules/Header.module.scss'
-import { setStaticClasses } from '../lib/classes.lib'
+
+import AvatarImage from '../public/images/avatar.png'
+import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
 
 const {
   headerActions,
@@ -17,19 +22,14 @@ const {
 } = styles
 
 export const HeaderActions = () => {
-  const router = useRouter()
+  const { openHeaderMobileSearchHandler, closeHeaderMobileSearchHandler } = useHeaderMobileSearchContext()
+
 
   const clickSearchButtonHandler = () => {
-    router.push('?header_search=true').then(r => r)
+    openHeaderMobileSearchHandler()
   }
 
-  useEffect(() => {
-    const returnButtonHandler = () => console.log('worked')
 
-    window.addEventListener('popstate', returnButtonHandler)
-
-    return () => window.removeEventListener('popstate', returnButtonHandler)
-  }, [router])
 
   return (
     <div className={ headerActions }>
