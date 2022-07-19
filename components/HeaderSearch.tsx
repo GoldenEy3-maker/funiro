@@ -113,11 +113,9 @@ export const HeaderSearch = () => {
           }) }
         >
           <div className={ headerSearchForm__icon }>
-            <button type={ searchValue ? 'submit' : 'button' } className={ submitBtn }
+            <button type={ searchValue ? 'submit' : 'button' } className={ setStaticClasses([submitBtn, '_activeButtonHighlightPseudoBefore'])  }
                     onClick={ clickHeaderSearchIconButtonHandler }>
               <svg
-                width="20"
-                height="20"
                 viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +129,7 @@ export const HeaderSearch = () => {
                 />
               </svg>
             </button>
-            <button type="button" className={ returnBtn } onClick={ clickReturnButtonHandler }>
+            <button type="button" className={ setStaticClasses([returnBtn, '_activeButtonHighlightPseudoBefore'])  } onClick={ clickReturnButtonHandler }>
               <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h48v48h-48z" fill="none"/>
                 <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
@@ -152,7 +150,7 @@ export const HeaderSearch = () => {
             />
           </div>
           <div className={ headerSearchForm__close }>
-            <button type="button" onClick={ resetSearchInput }>
+            <button type="button" className='_activeButtonHighlightPseudoBefore' onClick={ resetSearchInput }>
               <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000"
                    strokeLinecap="round" strokeLinejoin="round" strokeWidth="2px">
                 <title/>

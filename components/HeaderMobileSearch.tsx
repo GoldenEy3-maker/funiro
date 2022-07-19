@@ -2,7 +2,7 @@ import { HeaderSearch } from './HeaderSearch'
 
 import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
 
-import { setDynamicClasses } from '../lib/classes.lib'
+import { setDynamicClasses, setStaticClasses } from '../lib/classes.lib'
 
 import styles from '../styles/modules/Header.module.scss'
 
@@ -17,7 +17,7 @@ export const HeaderMobileSearch = () => {
       dynamicClasses: [[_isHeaderMobileSearchShow]],
       conditions: [isHeaderMobileSearchShow]
     }) }>
-      <div className={ headerMobileSearch__inner }>
+      <div className={ setStaticClasses([headerMobileSearch__inner, '_container']) }>
         <HeaderSearch/>
       </div>
     </div>

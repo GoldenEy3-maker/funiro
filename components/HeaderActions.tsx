@@ -47,7 +47,7 @@ export const HeaderActions = () => {
                    layout="fixed"/>
           </a></Link>
         </li>
-        <li className={ setStaticClasses([headerActions__item, _search]) } tabIndex={ 0 }
+        <li className={ setStaticClasses([headerActions__item, _search, '_activeButtonHighlightPseudoBefore']) }
             onClick={ openHeaderMobileSearchHandler }>
           <svg width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
