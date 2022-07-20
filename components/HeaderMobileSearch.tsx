@@ -17,7 +17,7 @@ export const HeaderMobileSearch = () => {
       dynamicClasses: [[_isHeaderMobileSearchShow]],
       conditions: [isHeaderMobileSearchShow]
     }) }>
-      <div className={ setStaticClasses([headerMobileSearch__inner, '_container']) }>
+      <div className={ setStaticClasses([headerMobileSearch__inner]) }>
         <HeaderSearch/>
       </div>
     </div>
