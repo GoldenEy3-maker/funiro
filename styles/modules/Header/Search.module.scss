@@ -93,12 +93,12 @@
           &:focus {
             outline: none;
 
-            background-color: var(--highlight-clicked-color-hsl);
+            background-color: var(--default-highlight-clicked-color-hsl);
           }
         }
 
         &:active {
-          background-color: var(--highlight-clicked-color-hsl);
+          background-color: var(--default-highlight-clicked-color-hsl);
         }
 
         @media (max-width: 675px) {
@@ -150,12 +150,12 @@
           &:focus {
             outline: none;
 
-            background-color: var(--highlight-clicked-color-hsl);
+            background-color: var(--default-highlight-clicked-color-hsl);
           }
         }
 
         &:active {
-          background-color: var(--highlight-clicked-color-hsl);
+          background-color: var(--default-highlight-clicked-color-hsl);
         }
 
         svg {

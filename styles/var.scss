@@ -6,7 +6,11 @@
 
   --black-color-hsl: hsl(var(--base-default-color), 0%);
   --white-color-hsl: hsl(var(--base-default-color), 100%);
-  --highlight-clicked-color-hsl: hsl(var(--base-default-color), 95%);
+  --default-highlight-clicked-color-hsl: hsl(var(--base-default-color), 95%);
+  --orange-highlight-clicked-color-hsl: hsl(
+    var(--base-primary-orange-color),
+    95%
+  );
   --primary-orange-color-hsl: hsl(var(--base-primary-orange-color), 68%);
   --secondary-orange-color-hsl: hsl(var(--base-secondary-orange-color), 97%);
   --red-color-hsl: hsl(var(--base-red-color), 80%);

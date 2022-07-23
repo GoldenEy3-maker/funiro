@@ -12,8 +12,7 @@
 
   box-shadow: 0 0 10px rgba(#000, 0.2);
 
-  // transition: left 0.2s cubic-bezier(0, 0.94, 0, 1.01);
-  transition: left .2s ease;
+  transition: left 0.2s ease;
 
   ._isSidebarShow & {
     left: 0;
@@ -25,10 +24,9 @@
     width: 100%;
     height: 100%;
 
-    padding-top: calc(
-      #{$head-border-bottom-height + px} + #{$head-height + px}
-    );
+    overflow: auto;
   }
 }
 
 @import './Head.module.scss';
+@import './Nav.module.scss';

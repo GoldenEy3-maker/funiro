@@ -1,0 +1,77 @@
+.sidebarContentNav {
+  &Item {
+    &Head {
+      button {
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+
+        padding: 15px;
+
+        background-color: transparent;
+        border: none;
+
+        &:active {
+          background-color: var(--orange-highlight-clicked-color-hsl);
+        }
+      }
+
+      &__title {
+        font-size: var(--default-font-size);
+      }
+
+      &__icon {
+        transition: transform 0.2s ease;
+
+        ._isSubmenuShow & {
+          transform: rotate(180deg);
+        }
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+
+    &Submenu {
+      position: absolute;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: opacity 0.2s ease, visibility 0.2s ease, height 0.2s ease;
+
+      ._isSubmenuShow & {
+        opacity: 1;
+        visibility: visible;
+
+        height: var(--submenu-height) !important;
+      }
+
+      &Item {
+        > a {
+          padding: 15px 10px 15px 35px;
+
+          &:active {
+            background-color: var(--orange-highlight-clicked-color-hsl);
+          }
+        }
+      }
+    }
+
+    &:not(._submenu) {
+      > a {
+        padding: 15px;
+
+        &:active {
+          background-color: var(--orange-highlight-clicked-color-hsl);
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { SidebarContentHead as Head } from './Head'
 import { SidebarContentProfile as Profile } from './Profile'
+import { SidebarContentNav as Nav } from './Nav/Main'
 
 import styles from '../../../styles/modules/Sidebar/Main.module.scss'
 
@@ -11,6 +12,7 @@ export const SidebarContent = () => {
       <div className={sidebarContent__inner}>
         <Head />
         <Profile />
+        <Nav />
       </div>
     </div>
   )
