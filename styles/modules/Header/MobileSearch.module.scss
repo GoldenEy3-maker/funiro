@@ -1,0 +1,27 @@
+.headerMobileSearch {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 10;
+
+  width: 100%;
+  height: 100%;
+
+  transition: top 0.2s ease;
+
+  &._isHeaderMobileSearchShow {
+    top: 0;
+  }
+
+  &__inner {
+    height: 100%;
+  }
+
+  @media (min-width: 675px) {
+    display: none;
+
+    &._isHeaderMobileSearchShow {
+      display: none;
+    }
+  }
+}

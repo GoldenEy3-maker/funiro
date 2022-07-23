@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { setStaticClasses } from '../lib/classes.lib'
+import { useHeaderMobileSearchContext } from '../../context/headerMobileSearch.context'
 
-import styles from '../styles/modules/Header.module.scss'
+import { setStaticClasses } from '../../lib/classes.lib'
 
-import AvatarImage from '../public/images/avatar.png'
-import { useHeaderMobileSearchContext } from '../context/headerMobileSearch.context'
+import styles from '../../styles/modules/Header/Main.module.scss'
+
+import AvatarImage from '../../public/images/avatar.png'
 
 const { headerActions, headerActions__list, headerActions__item, _search } =
   styles

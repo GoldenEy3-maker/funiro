@@ -1,0 +1,51 @@
+@import '../_vars.scss';
+
+.sidebarContentHead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: #{$head-height + px};
+
+  padding: 0 10px;
+
+  border-bottom: #{$head-border-bottom-height + px} solid var(--primary-orange-color-hsl);
+
+  box-shadow: 0 0 10px rgba(#000, 0.15);
+
+  button {
+    cursor: pointer;
+
+    height: 100%;
+
+    padding: 0 10px;
+
+    background-color: transparent;
+    border: none;
+
+    &:active {
+      border-radius: 50%;
+
+      background-color: var(--highlight-clicked-color-hsl);
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &__close {
+    height: 100%;
+  }
+
+  &__settings {
+    height: 100%;
+  }
+}

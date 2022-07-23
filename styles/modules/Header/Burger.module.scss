@@ -1,0 +1,55 @@
+@import './_vars.scss';
+
+.headerBurger {
+  height: 100%;
+
+  &__btn {
+    cursor: pointer;
+
+    position: relative;
+
+    width: 45px;
+    height: 100%;
+
+    background-color: transparent;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    &:active {
+      border-radius: 10px;
+
+      background-color: var(--highlight-clicked-color-hsl);
+    }
+
+    &:after,
+    &:before {
+      content: '';
+
+      display: block;
+
+      width: calc(100% - #{$elements-padding + px});
+      height: 2px;
+
+      background-color: var(--black-color-hsl);
+    }
+
+    span {
+      display: block;
+
+      width: calc(100% - #{$elements-padding + px});
+      height: 2px;
+
+      background-color: var(--black-color-hsl);
+    }
+  }
+
+  @media screen and (min-width: 991.89px) {
+    display: none;
+  }
+}

@@ -1,0 +1,51 @@
+@import '../../function';
+@import './_vars.scss';
+
+.header {
+  &__inner {
+    position: relative;
+
+    min-height: adaptive-clamp(
+      $mobile-header-height + $mobile-border-bottom-height,
+      $default-header-height,
+      675
+    );
+    height: 1px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: adaptive-clamp(20, 40, 991.98);
+
+    margin-top: adaptive-clamp(15, 40, 675);
+  }
+
+  @media (max-width: 991.98px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    width: 100%;
+  }
+
+  @media (max-width: 675px) {
+    &__inner {
+      margin-top: 0;
+
+      background-color: var(--white-color-hsl);
+
+      box-shadow: 0 0 5px rgba(black, 0.1);
+
+      border-bottom: #{$mobile-border-bottom-height + px} solid var(--primary-orange-color-hsl);
+    }
+  }
+}
+
+@import './Logo.module.scss';
+@import './Nav.module.scss';
+@import './Search.module.scss';
+@import './Burger.module.scss';
+@import './MobileSearch.module.scss';
+@import './MobileSearch.module.scss';
+@import './Actions.module.scss';

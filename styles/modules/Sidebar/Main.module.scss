@@ -1,0 +1,53 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+  &._isSidebarShow {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__inner {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  &__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    visibility: hidden;
+
+    background-color: rgba(black, 0.3);
+
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+
+    ._isSidebarShow & {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @media screen and (min-width: 991.98px) {
+    display: none;
+  }
+}
+
+@import './Content/Main.module.scss';
