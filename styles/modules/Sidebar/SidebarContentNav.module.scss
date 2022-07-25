@@ -2,7 +2,7 @@
 
 .sidebarContentNav {
   padding-bottom: 60px;
-  
+
   &Item {
     &Head {
       button {
@@ -50,17 +50,15 @@
       opacity: 0;
       visibility: hidden;
 
-      transition: opacity 0.2s ease, visibility 0.2s ease, height 0.2s ease;
+      transition: opacity 0.2s ease, visibility 0.2s ease, height 0.4s cubic-bezier(0.25, 0.1, 0, 1.46);
 
-      &._loaded {
+      &._ready {
         position: static;
 
         height: 0px;
       }
 
       ._isSubmenuShow & {
-        position: static;
-
         opacity: 1;
         visibility: visible;
 

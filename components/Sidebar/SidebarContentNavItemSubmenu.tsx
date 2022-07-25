@@ -25,7 +25,7 @@ const {
   sidebarContentNavItemSubmenuItem,
   _submenu,
   _isSubmenuShow,
-  _loaded,
+  _ready,
 } = styles
 
 export const SidebarContentNavItemSubmenu = ({
@@ -40,20 +40,22 @@ export const SidebarContentNavItemSubmenu = ({
 
   const toggleSubmenuHandler = () => setIsSubmenuOpen((prev) => !prev)
 
-  const clickSubmenuLinkHandler = () => {
-    closeSidebarHandler()
-    setIsSubmenuOpen(false)
+  const readySubmenu = async () => {
+    if (submenuRef.current) {
+      const currentSubmenu = submenuRef.current
+      const submenuHeight = await currentSubmenu.offsetHeight
+
+      currentSubmenu.style.setProperty(
+        '--submenu-height',
+        submenuHeight + 'px'
+      )
+
+      currentSubmenu.classList.add(_ready)
+    }
   }
 
   useEffect(() => {
-    if (submenuRef.current) {
-      const currentSubmenu = submenuRef.current
-      const submenuHeight = currentSubmenu.offsetHeight
-
-      currentSubmenu.style.setProperty('--submenu-height', submenuHeight + 'px')
-
-      setTimeout(() => currentSubmenu.classList.add(_loaded), 0)
-    }
+    readySubmenu()
   }, [])
 
   return (
@@ -96,7 +98,7 @@ export const SidebarContentNavItemSubmenu = ({
                 className={sidebarContentNavItemSubmenuItem}
               >
                 <Link href={navSubmenu.href}>
-                  <a onClick={clickSubmenuLinkHandler}>{navSubmenu.title}</a>
+                  <a onClick={closeSidebarHandler}>{navSubmenu.title}</a>
                 </Link>
               </li>
             ))}

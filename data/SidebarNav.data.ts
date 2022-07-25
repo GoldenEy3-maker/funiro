@@ -18,6 +18,12 @@ export const getSidebarNavData = (): ISidebarNavData[] => {
   return [
     {
       id: uuidv4(),
+      isSubmenu: false,
+      title: 'Home',
+      href: '/'
+    },
+    {
+      id: uuidv4(),
       isSubmenu: true,
       title: 'Products',
       submenu: [
@@ -64,6 +70,31 @@ export const getSidebarNavData = (): ISidebarNavData[] => {
       id: uuidv4(),
       isSubmenu: false,
       title: 'Inspirations',
+      href: '/'
+    },
+
+    {
+      id: uuidv4(),
+      isSubmenu: false,
+      title: 'Cart',
+      href: '/'
+    },
+    {
+      id: uuidv4(),
+      isSubmenu: false,
+      title: 'Favorites',
+      href: '/'
+    },
+    {
+      id: uuidv4(),
+      isSubmenu: false,
+      title: 'Profile',
+      href: '/'
+    },
+    {
+      id: uuidv4(),
+      isSubmenu: false,
+      title: 'Settings',
       href: '/'
     }
   ]

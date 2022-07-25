@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useRef } from 'react'
 
-import { getSidebarNavData, ISidebarNavData } from '../../data/SidebarNav.data'
+import { getSidebarNavData } from '../../data/SidebarNav.data'
 
 import { SidebarContentNavItemSubmenu } from './SidebarContentNavItemSubmenu'
 import { SidebarContentNavItemLink } from './SidebarContentNavItemLink'
@@ -10,19 +10,14 @@ import styles from '../../styles/modules/Sidebar/Sidebar.module.scss'
 const { sidebarContentNav, sidebarContentNav__list } = styles
 
 export const SidebarContentNav = () => {
-  const [navData, setNavData] = useState<ISidebarNavData[] | null>(null)
-
-  useEffect(() => {
-    const data = getSidebarNavData()
-    setNavData(data)
-  }, [])
+  const navDataRef = useRef(getSidebarNavData())
 
   return (
     <div className={sidebarContentNav}>
       <ul className={sidebarContentNav__list}>
-        {navData &&
-          navData.length > 0 &&
-          navData.map((nav) =>
+        {navDataRef.current &&
+          navDataRef.current.length > 0 &&
+          navDataRef.current.map((nav) =>
             nav.isSubmenu ? (
               <SidebarContentNavItemSubmenu
                 key={nav.id}
