@@ -85,25 +85,24 @@ export const HeaderActions = () => {
             </a>
           </Link>
         </li>
-        <li
-          className={setStaticClasses([headerActions__item, _search])}
-          onClick={openHeaderMobileSearchHandler}
-        >
-          <svg
-            width='30'
-            height='30'
-            viewBox='0 0 20 20'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M16.6667 16.6667L12.5802 12.5802M12.5802 12.5802C13.5604 11.5999 14.1667 10.2458 14.1667 8.75C14.1667 5.75846 11.7416 3.33334 8.75004 3.33334C5.7585 3.33334 3.33337 5.75846 3.33337 8.75C3.33337 11.7415 5.7585 14.1667 8.75004 14.1667C10.2458 14.1667 11.6 13.5604 12.5802 12.5802Z'
-              stroke='#262F56'
-              strokeWidth='1.8'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-          </svg>
+        <li className={setStaticClasses([headerActions__item, _search])}>
+          <button type='button' onClick={openHeaderMobileSearchHandler}>
+            <svg
+              width='30'
+              height='30'
+              viewBox='0 0 20 20'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M16.6667 16.6667L12.5802 12.5802M12.5802 12.5802C13.5604 11.5999 14.1667 10.2458 14.1667 8.75C14.1667 5.75846 11.7416 3.33334 8.75004 3.33334C5.7585 3.33334 3.33337 5.75846 3.33337 8.75C3.33337 11.7415 5.7585 14.1667 8.75004 14.1667C10.2458 14.1667 11.6 13.5604 12.5802 12.5802Z'
+                stroke='#262F56'
+                strokeWidth='1.8'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </button>
         </li>
       </ul>
     </div>

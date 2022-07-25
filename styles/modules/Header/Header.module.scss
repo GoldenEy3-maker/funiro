@@ -35,9 +35,11 @@
 
       background-color: var(--white-color-hsl);
 
-      box-shadow: 0 0 5px rgba(black, 0.1);
+      box-shadow: 0 0 10px rgba(black, 0.1);
 
-      border-bottom: #{$mobile-border-bottom-height + px} solid var(--primary-orange-color-hsl);
+      border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
+
+      // border-bottom: #{$mobile-border-bottom-height + px} solid var(--primary-orange-color-hsl);
     }
   }
 }

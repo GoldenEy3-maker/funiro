@@ -6,8 +6,15 @@ import { SidebarContentNavItemSubmenu } from './SidebarContentNavItemSubmenu'
 import { SidebarContentNavItemLink } from './SidebarContentNavItemLink'
 
 import styles from '../../styles/modules/Sidebar/Sidebar.module.scss'
+import Link from 'next/link'
+import { setStaticClasses } from '../../lib/classes.lib'
 
-const { sidebarContentNav, sidebarContentNav__list } = styles
+const {
+  sidebarContentNav,
+  sidebarContentNav__list,
+  sidebarContentNavItem,
+  _exitLink,
+} = styles
 
 export const SidebarContentNav = () => {
   const navDataRef = useRef(getSidebarNavData())
@@ -32,6 +39,11 @@ export const SidebarContentNav = () => {
               />
             )
           )}
+        <li className={setStaticClasses([sidebarContentNavItem, _exitLink])}>
+          <Link href='/'>
+            <a>Get Out</a>
+          </Link>
+        </li>
       </ul>
     </div>
   )

@@ -5,7 +5,7 @@ import styles from '../../styles/modules/Sidebar/Sidebar.module.scss'
 const {
   sidebarContentHead,
   sidebarContentHead__close,
-  sidebarContentHead__settings,
+  sidebarContentHead__notify,
 } = styles
 
 export const SidebarContentHead = () => {
@@ -49,8 +49,8 @@ export const SidebarContentHead = () => {
           </svg>
         </button>
       </div>
-      <div className={sidebarContentHead__settings}>
-        <button type='button'>
+      <div className={sidebarContentHead__notify}>
+        <button type='button' data-counter='10'>
           <svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'>
             <title />
             <g data-name='Layer 30' id='Layer_30'>

@@ -21,7 +21,7 @@ export const MainLayout = ({
       <div className='wrapper'>
         <Header />
         <Sidebar />
-        {children}
+        <main className='page-content'>{children}</main>
       </div>
     </>
   )

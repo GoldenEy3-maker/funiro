@@ -17,7 +17,7 @@
 
   background-color: var(--white-color-hsl);
 
-  border-bottom: #{$head-border-bottom-height + px} solid var(--primary-orange-color-hsl);
+  border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
 
   box-shadow: 0 0 10px rgba(#000, 0.15);
 
@@ -26,15 +26,23 @@
 
     height: 100%;
 
-    padding: 0 10px;
-
     background-color: transparent;
     border: none;
+
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:active {
       border-radius: 50%;
 
       background-color: var(--default-highlight-clicked-color-hsl);
+
+      .buttonInner {
+        background-color: var(--default-highlight-clicked-color-hsl);
+      }
     }
 
     svg {
@@ -45,9 +53,38 @@
 
   &__close {
     height: 100%;
+
   }
 
-  &__settings {
+  &__notify {
     height: 100%;
+
+    button {
+      position: relative;
+
+      &:before {
+        content: attr(data-counter);
+
+        position: absolute;
+        top: 0;
+        right: -5px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        width: 30px;
+        height: 30px;
+
+        font-size: 15px;
+
+        border-radius: 50%;
+
+        border: 2px solid var(--primary-orange-color-hsl);
+
+        background-color: hsl(var(--base-primary-orange-color), 93%);
+
+      }
+    }
   }
 }

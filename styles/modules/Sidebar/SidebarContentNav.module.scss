@@ -50,7 +50,8 @@
       opacity: 0;
       visibility: hidden;
 
-      transition: opacity 0.2s ease, visibility 0.2s ease, height 0.4s cubic-bezier(0.25, 0.1, 0, 1.46);
+      transition: opacity 0.2s ease, visibility 0.2s ease,
+        height 0.4s cubic-bezier(0.25, 0.1, 0, 1.46);
 
       &._ready {
         position: static;
@@ -83,6 +84,12 @@
         &:active {
           background-color: var(--orange-highlight-clicked-color-hsl);
         }
+      }
+    }
+
+    &._exitLink {
+      a {
+        color: hsl(var(--base-red-color), 60%);
       }
     }
   }
