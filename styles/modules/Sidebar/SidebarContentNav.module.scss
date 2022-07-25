@@ -1,4 +1,7 @@
+@import './vars.scss';
+
 .sidebarContentNav {
+  padding-bottom: #{$head-height + px};
   &Item {
     &Head {
       button {
