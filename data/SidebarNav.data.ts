@@ -6,7 +6,7 @@ export interface ISidebarNavSubmenuData {
   href: string
 }
 
-interface ISidebarNavData {
+export interface ISidebarNavData {
   id: string
   isSubmenu: boolean
   title: string

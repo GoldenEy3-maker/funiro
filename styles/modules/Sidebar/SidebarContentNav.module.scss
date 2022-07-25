@@ -41,16 +41,26 @@
     &Submenu {
       position: absolute;
 
+      overflow: hidden;
+
       opacity: 0;
       visibility: hidden;
 
       transition: opacity 0.2s ease, visibility 0.2s ease, height 0.2s ease;
 
+      &._loaded {
+        position: static;
+
+        height: 0px;
+      }
+
       ._isSubmenuShow & {
+        position: static;
+
         opacity: 1;
         visibility: visible;
 
-        height: var(--submenu-height) !important;
+        height: var(--submenu-height);
       }
 
       &Item {

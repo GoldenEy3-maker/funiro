@@ -2,20 +2,17 @@ import Link from 'next/link'
 
 import { useEffect, useRef, useState } from 'react'
 
-import { ISidebarNavSubmenuData } from '../../../../data/SidebarNav.data'
+import { useSidebarContext } from '../../context/Sidebar.context'
 
-import {
-  setDynamicClasses,
-  setStaticClasses,
-} from '../../../../lib/classes.lib'
+import { ISidebarNavSubmenuData } from '../../data/SidebarNav.data'
 
-import styles from '../../../../styles/modules/Sidebar/Main.module.scss'
+import { setDynamicClasses } from '../../lib/classes.lib'
 
-interface ISidebarContentNavItemProps {
+import styles from '../../styles/modules/Sidebar/Sidebar.module.scss'
+
+interface ISidebarContentNavItemSubmenuProps {
   title: string
-  isSubmenu: boolean
-  submenu?: ISidebarNavSubmenuData[]
-  href?: string
+  submenu: ISidebarNavSubmenuData[] | undefined
 }
 
 const {
@@ -28,19 +25,25 @@ const {
   sidebarContentNavItemSubmenuItem,
   _submenu,
   _isSubmenuShow,
+  _loaded,
 } = styles
 
-export const SidebarContentNavItem = ({
+export const SidebarContentNavItemSubmenu = ({
   title,
-  isSubmenu,
   submenu,
-  href,
-}: ISidebarContentNavItemProps) => {
+}: ISidebarContentNavItemSubmenuProps) => {
+  const { closeSidebarHandler } = useSidebarContext()
+
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false)
 
   const submenuRef = useRef<HTMLDivElement>(null)
 
   const toggleSubmenuHandler = () => setIsSubmenuOpen((prev) => !prev)
+
+  const clickSubmenuLinkHandler = () => {
+    closeSidebarHandler()
+    setIsSubmenuOpen(false)
+  }
 
   useEffect(() => {
     if (submenuRef.current) {
@@ -49,14 +52,11 @@ export const SidebarContentNavItem = ({
 
       currentSubmenu.style.setProperty('--submenu-height', submenuHeight + 'px')
 
-      setTimeout(() => {
-        currentSubmenu.style.position = 'static'
-        currentSubmenu.style.height = '0px'
-      }, 0)
+      setTimeout(() => currentSubmenu.classList.add(_loaded), 0)
     }
   }, [])
 
-  return isSubmenu ? (
+  return (
     <li
       className={setDynamicClasses({
         staticClasses: [sidebarContentNavItem, _submenu],
@@ -96,18 +96,12 @@ export const SidebarContentNavItem = ({
                 className={sidebarContentNavItemSubmenuItem}
               >
                 <Link href={navSubmenu.href}>
-                  <a>{navSubmenu.title}</a>
+                  <a onClick={clickSubmenuLinkHandler}>{navSubmenu.title}</a>
                 </Link>
               </li>
             ))}
         </ul>
       </div>
-    </li>
-  ) : (
-    <li className={sidebarContentNavItem}>
-      <Link href={href ? href : '/'}>
-        <a>{title}</a>
-      </Link>
     </li>
   )
 }

@@ -1,10 +1,10 @@
-import { HeaderSearch } from './Search'
+import { HeaderSearch } from './HeaderSearch'
 
 import { useHeaderMobileSearchContext } from '../../context/headerMobileSearch.context'
 
 import { setDynamicClasses, setStaticClasses } from '../../lib/classes.lib'
 
-import styles from '../../styles/modules/Header/Main.module.scss'
+import styles from '../../styles/modules/Header/Header.module.scss'
 
 const {
   headerMobileSearch,

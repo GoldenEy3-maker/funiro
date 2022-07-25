@@ -1,6 +1,6 @@
-import { useSidebarContext } from '../../../context/Sidebar.context'
+import { useSidebarContext } from '../../context/Sidebar.context'
 
-import styles from '../../../styles/modules/Sidebar/Main.module.scss'
+import styles from '../../styles/modules/Sidebar/Sidebar.module.scss'
 
 const {
   sidebarContentHead,

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import styles from '../../styles/modules/Header/Main.module.scss'
+import styles from '../../styles/modules/Header/Header.module.scss'
 
 const { headerLogo } = styles
 

@@ -1,6 +1,6 @@
 import { useSidebarContext } from '../../context/Sidebar.context'
 
-import styles from '../../styles/modules/Header/Main.module.scss'
+import styles from '../../styles/modules/Header/Header.module.scss'
 
 const { headerBurger, headerBurger__btn } = styles
 

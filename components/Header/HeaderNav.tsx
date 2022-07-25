@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { setStaticClasses } from '../../lib/classes.lib'
 
-import styles from '../../styles/modules/Header/Main.module.scss'
+import styles from '../../styles/modules/Header/Header.module.scss'
 
 const {
   headerNav,

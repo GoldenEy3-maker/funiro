@@ -2,8 +2,8 @@ import type { IChildrenProps } from '../../typescript/interface'
 
 import Head from 'next/head'
 
-import Header from '../Header/Main'
-import Sidebar from '../Sidebar/Main'
+import Header from '../Header/Header'
+import Sidebar from '../Sidebar/Sidebar'
 
 interface IMainLayoutProps extends IChildrenProps {
   title?: string
