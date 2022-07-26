@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { useState } from 'react'
-import { setDynamicClasses, setStaticClasses } from '../../lib/classes.lib'
+import { setDynamicClasses } from '../../lib/classes.lib'
 
 import AvatarPicture from '../../public/images/avatar.png'
 
