@@ -1,8 +1,16 @@
 .sidebarContentProfile {
   margin-bottom: 10px;
 
+  &__inner {
+    position: relative;
+  }
 
-  a {
+  &Upper {
+    position: relative;
+    z-index: 2;
+
+    overflow: hidden;
+
     display: flex;
     align-items: center;
 
@@ -12,23 +20,101 @@
 
     box-shadow: 0 0 10px rgba(#000, 0.15);
 
-    padding: 15px;
+    border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
+
+    padding: 15px 15px 30px 15px;
 
     &:active {
       transform: scale(0.99);
 
-    background-color: hsl(var(--base-default-color), 95%);
+      background-color: hsl(var(--base-default-color), 95%);
+    }
 
+    &__avatar {
+      border-radius: 50%;
+
+      overflow: hidden;
+
+      background-color: var(--default-highlight-clicked-color-hsl);
+    }
+
+    &__btn {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        background-color: transparent;
+        border: none;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 5px 0;
+
+        transition: transform 0.2s ease;
+
+        ._isSubmenuOpen & {
+          transform: rotate(180deg);
+        }
+      }
     }
   }
 
-  &__avatar {
+  &Downed {
+    position: absolute;
+    top: 0;
+    left: 0;
 
-    border-radius: 50%;
+    width: 100%;
 
-    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
 
-    background-color: var(--default-highlight-clicked-color-hsl);
+    padding: 25px 15px 20px 15px;
+
+    background-color: var(--white-color-hsl);
+
+    box-shadow: 0 0 10px rgba(#000, 0.15);
+
+    transition: top 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+
+    ._isSubmenuOpen & {
+      top: 90%;
+
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &Specials {
+      &__list {
+        display: flex;
+        flex-direction: column;
+
+        gap: 15px;
+      }
+
+      &Item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 15px;
+
+        &__title {
+        }
+
+        &__value {
+          color: var(--primary-orange-color-hsl);
+        }
+      }
+    }
   }
-
 }
