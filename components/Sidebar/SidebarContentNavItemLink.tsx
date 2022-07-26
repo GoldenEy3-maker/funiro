@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useSidebarContext } from '../../context/Sidebar.context'
 
 import styles from '../../styles/modules/Sidebar/SidebarContentNav.module.scss'
 
@@ -13,10 +14,12 @@ export const SidebarContentNavItemLink = ({
   href,
   title,
 }: ISidebarContentNavItemLinkProps) => {
+  const { closeSidebarHandler } = useSidebarContext()
+
   return (
     <li className={sidebarContentNavItem}>
       <Link href={href ? href : '/'}>
-        <a>{title}</a>
+        <a onClick={closeSidebarHandler}>{title}</a>
       </Link>
     </li>
   )

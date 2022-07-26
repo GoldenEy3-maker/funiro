@@ -40,22 +40,31 @@ export const SidebarContentNavItemSubmenu = ({
 
   const toggleSubmenuHandler = () => setIsSubmenuOpen((prev) => !prev)
 
-  const readySubmenu = async () => {
-    if (submenuRef.current) {
-      const currentSubmenu = submenuRef.current
-      const submenuHeight = await currentSubmenu.offsetHeight
+  // const readySubmenu = async () => {
+  //   if (submenuRef.current) {
+  //     const currentSubmenu = submenuRef.current
+  //     const submenuHeight = await currentSubmenu.offsetHeight
 
-      currentSubmenu.style.setProperty(
-        '--submenu-height',
-        submenuHeight + 'px'
-      )
+  //     currentSubmenu.style.setProperty(
+  //       '--submenu-height',
+  //       submenuHeight + 'px'
+  //     )
 
-      currentSubmenu.classList.add(_ready)
-    }
-  }
+  //     currentSubmenu.classList.add(_ready)
+  //   }
+  // }
 
   useEffect(() => {
-    readySubmenu()
+    if (submenuRef.current) {
+      const currentSubmenu = submenuRef.current
+      const submenuHeight = currentSubmenu.offsetHeight
+
+      currentSubmenu.style.setProperty('--submenu-height', submenuHeight + 'px')
+
+      setTimeout(() => {
+        currentSubmenu.classList.add(_ready)
+      }, 0)
+    }
   }, [])
 
   return (
