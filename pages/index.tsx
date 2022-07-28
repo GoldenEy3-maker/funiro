@@ -2,15 +2,14 @@ import type { NextPage } from 'next'
 
 import { MainLayout } from '../components/layout/Main'
 
+import Intro from '../components/Intro/Intro'
 
 const HomePage: NextPage = () => {
-  return <MainLayout>
-    <div className="intro">
-      <div className="intro__inner _container">
-        Home Page
-      </div>
-    </div>
-  </MainLayout>
+  return (
+    <MainLayout>
+      <Intro />
+    </MainLayout>
+  )
 }
 
 export default HomePage

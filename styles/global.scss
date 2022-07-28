@@ -89,6 +89,8 @@ input[type='search']::-webkit-search-results-decoration {
 
   display: flex;
   flex-direction: column;
+
+  overflow-x: hidden;
 }
 
 ._container {
@@ -110,3 +112,19 @@ input[type='search']::-webkit-search-results-decoration {
   }
 }
 
+._primary-link {
+  a {
+    background-color: var(--primary-orange-color-hsl);
+
+    color: var(--white-color-hsl);
+  }
+}
+
+._primary-btn {
+  button {
+    background-color: var(--primary-orange-color-hsl);
+    border: none;
+
+    color: var(--white-color-hsl);
+  }
+}

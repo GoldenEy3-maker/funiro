@@ -1,0 +1,302 @@
+@import './var';
+
+.intro {
+  position: relative;
+
+  margin-top: 56px;
+
+  &__inner {
+    position: relative;
+    z-index: 10;
+  }
+
+  &Controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-left: calc(#{$intro-info-max-width + px} + 32px);
+
+    &Dots {
+      &__list {
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+      }
+
+      &Item {
+        &._activeDot {
+          button {
+            border: 1px solid var(--primary-orange-color-hsl);
+
+            span {
+              background-color: var(--primary-orange-color-hsl);
+            }
+          }
+        }
+
+        button {
+          cursor: pointer;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 30px;
+          height: 30px;
+
+          background-color: transparent;
+
+          border-radius: 50%;
+
+          border: none;
+
+          border: 1px solid transparent;
+
+          transition: border 0.2s ease;
+
+          span {
+            width: 10px;
+            height: 10px;
+
+            background-color: hsl(var(--base-default-color), 85%);
+
+            border-radius: 50%;
+
+            transition: background-color 0.2s ease;
+          }
+
+          @media screen and (min-width: 991.98px) {
+            &:hover {
+              span {
+                background-color: var(--primary-orange-color-hsl);
+              }
+            }
+
+            &:focus {
+              outline: none;
+
+              span {
+                background-color: var(--primary-orange-color-hsl);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &Arrows {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      &__btn {
+        button {
+          cursor: pointer;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 50px;
+          height: 50px;
+
+          border-radius: 50%;
+
+          background-color: hsl(var(--base-primary-orange-color), 93%);
+          border: none;
+
+          transition: background-color 0.2s ease;
+
+          svg {
+            path {
+              stroke: var(--primary-orange-color-hsl);
+
+              transition: stroke 0.2s ease;
+            }
+          }
+
+          @media screen and (min-width: 991.98px) {
+            &:hover {
+              background-color: var(--primary-orange-color-hsl);
+
+              svg {
+                path {
+                  stroke: var(--white-color-hsl);
+                }
+              }
+            }
+
+            &:focus {
+              outline: none;
+
+              background-color: var(--primary-orange-color-hsl);
+
+              svg {
+                path {
+                  stroke: var(--white-color-hsl);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &Info {
+    $flex-gap: 16;
+    $link-margin-top: 48;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: #{$flex-gap + px};
+
+    border-radius: var(--default-border-radius);
+
+    padding: 60px;
+
+    max-width: 500px;
+
+    background-color: rgba(white, 0.72);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 0 10px rgba(#000, 0.1);
+
+    &__title {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 67px;
+    }
+
+    &__text {
+      color: var(--secondary-text-color-hsl);
+
+      font-size: 20px;
+      line-height: 30px;
+    }
+
+    &__link {
+      margin-top: calc(#{$link-margin-top + px} - #{$flex-gap + px});
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 24px 0;
+
+        font-size: 20px;
+
+        transition: background-color 0.2s ease, transform 0.1s ease,
+          box-shadow 0.2s ease;
+
+        @media screen and (min-width: 991.98px) {
+          &:hover {
+            background-color: hsl(var(--base-primary-orange-color), 60%);
+          }
+
+          &:focus {
+            outline: none;
+
+            background-color: hsl(var(--base-primary-orange-color), 60%);
+
+            box-shadow: 0 0 10px rgba(#000, 0.2);
+          }
+        }
+
+        &:active {
+          background-color: hsl(var(--base-primary-orange-color), 60%);
+
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+
+  &Slider {
+    margin-top: 30px;
+
+    &__list {
+      display: flex;
+      align-items: center;
+
+      gap: 32px;
+    }
+  }
+
+  &SlideInfo {
+    position: absolute;
+    bottom: 30px;
+    right: 20%;
+    z-index: 10;
+
+    border-radius: var(--default-border-radius);
+
+    background-color: rgba(white, 0.72);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 0 10px rgba(#000, 0.1);
+
+    width: 100%;
+    max-width: 300px;
+
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    &Head {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 33px;
+    }
+
+    &Body {
+      color: hsl(var(--base-default-color), 38%);
+      line-height: 24px;
+    }
+
+    &Footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-top: 10px;
+
+      &__price {
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 600;
+      }
+
+      &__link {
+        a {
+          transition: transform 0.2s ease;
+
+          @media screen and (min-width: 991.98px) {
+            &:focus {
+              outline: none;
+
+              transform: scale(1.5);
+            }
+          }
+        }
+      }
+    }
+  }
+}
