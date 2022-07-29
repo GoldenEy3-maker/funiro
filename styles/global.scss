@@ -21,7 +21,6 @@ body {
   font-style: var(--default-font-style);
 
   color: var(--black-color-hsl);
-  background-color: var(--secondary-orange-color-hsl);
 
   scroll-behavior: smooth;
 
@@ -103,13 +102,7 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .page-content {
-  @media (max-width: 991.98px) {
-    padding-top: 85px;
-  }
-
-  @media (max-width: 675px) {
-    padding-top: 65px;
-  }
+ 
 }
 
 ._primary-link {

@@ -2,6 +2,13 @@
 @import './_vars.scss';
 
 .header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
+  
   &__inner {
     position: relative;
 

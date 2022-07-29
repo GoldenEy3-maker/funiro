@@ -3,7 +3,22 @@
 .intro {
   position: relative;
 
-  margin-top: 56px;
+  padding-top: 160px;
+
+  background-color: var(--secondary-orange-color-hsl);
+
+  &:before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 60%;
+    height: 100%;
+
+    background-color: hsl(var(--base-secondary-orange-color), 94%);
+  }
 
   &__inner {
     position: relative;
@@ -30,7 +45,9 @@
       &Item {
         &._activeDot {
           button {
-            border: 1px solid var(--primary-orange-color-hsl);
+            &:before {
+              transform: scale(1);
+            }
 
             span {
               background-color: var(--primary-orange-color-hsl);
@@ -39,6 +56,8 @@
         }
 
         button {
+          position: relative;
+
           cursor: pointer;
 
           display: flex;
@@ -54,10 +73,6 @@
 
           border: none;
 
-          border: 1px solid transparent;
-
-          transition: border 0.2s ease;
-
           span {
             width: 10px;
             height: 10px;
@@ -67,6 +82,25 @@
             border-radius: 50%;
 
             transition: background-color 0.2s ease;
+          }
+
+          &:before {
+            content: '';
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 50%;
+
+            border: 2px solid var(--primary-orange-color-hsl);
+
+            transform: scale(0);
+
+            transition: transform 0.3s ease;
           }
 
           @media screen and (min-width: 991.98px) {
@@ -240,23 +274,47 @@
     right: 20%;
     z-index: 10;
 
-    border-radius: var(--default-border-radius);
-
-    background-color: rgba(white, 0.72);
-
-    backdrop-filter: blur(10px);
-
-    box-shadow: 0 0 10px rgba(#000, 0.1);
-
     width: 100%;
     max-width: 300px;
 
-    padding: 24px;
+    transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
 
-    display: flex;
-    flex-direction: column;
+    &._isAnimate {
+      transform: scale(0.8);
+      opacity: 0;
+      visibility: hidden;
 
-    gap: 5px;
+      .introSlideInfoHead {
+        opacity: 0;
+      }
+
+      .introSlideInfoBody {
+        opacity: 0;
+      }
+
+      .introSlideInfoFooter {
+        opacity: 0;
+      }
+    }
+
+    &__inner {
+      border-radius: var(--default-border-radius);
+
+      background-color: rgba(white, 0.72);
+
+      backdrop-filter: blur(10px);
+
+      box-shadow: 0 0 10px rgba(#000, 0.1);
+
+      padding: 24px;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 5px;
+
+      overflow: hidden;
+    }
 
     &Head {
       font-size: 28px;
@@ -298,5 +356,13 @@
         }
       }
     }
+  }
+
+  @media (max-width: 991.98px) {
+    padding-top: 120px;
+  }
+
+  @media (max-width: 675px) {
+    padding-top: 100px;
   }
 }
