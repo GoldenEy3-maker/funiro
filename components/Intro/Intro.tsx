@@ -6,12 +6,13 @@ import { useRef, useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
+import { TIntervalTimer } from '../../typescript/type'
+
 import { setDynamicClasses, setStaticClasses } from '../../lib/classes.lib'
 
 import styles from '../../styles/modules/Intro/Intro.module.scss'
 
 import Slide1 from '../../public/images/slide1.jpg'
-import { TIntervalTimer } from '../../typescript/type'
 
 interface IIntroSliderData {
   id: string
@@ -50,6 +51,9 @@ const {
 } = styles
 
 const Intro = () => {
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
+  const [transformX, setTransformX] = useState<number | null>(null)
+
   const sliderDataRef = useRef<IIntroSliderData[]>([
     {
       id: uuidv4(),
@@ -92,34 +96,36 @@ const Intro = () => {
       href: '/',
     },
   ])
+  const introSlideInfoRef = useRef<HTMLDivElement>(null)
   const slideWidthRef = useRef(934)
   const gapSlidesRef = useRef(32)
-  const startPositionRef = useRef(320)
+  const slideWidthWithGapRef = useRef(
+    slideWidthRef.current + gapSlidesRef.current
+  )
+  const startPositionRef = useRef(slideWidthWithGapRef.current / 3)
   const startPointSlideRef = useRef(
-    startPositionRef.current + slideWidthRef.current + gapSlidesRef.current
+    startPositionRef.current + slideWidthWithGapRef.current
   )
   const animTimeoutIDRef = useRef<TIntervalTimer>()
 
-  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
-  const [transformX, setTransformX] = useState<number | null>(null)
-  const [isAnimStart, setIsAnimStart] = useState(false)
+  const animateSlideInfoHandler = () => {
+    if (introSlideInfoRef.current) {
+      introSlideInfoRef.current.classList.add(_isAnimate)
 
-  const animationSlideInfoHandler = () => {
-    setIsAnimStart(true)
+      if (animTimeoutIDRef.current) {
+        clearTimeout(animTimeoutIDRef.current)
+        animTimeoutIDRef.current = undefined
+      }
 
-    if (animTimeoutIDRef.current) {
-      clearTimeout(animTimeoutIDRef.current)
-      animTimeoutIDRef.current = undefined
+      animTimeoutIDRef.current = setTimeout(() => {
+        introSlideInfoRef.current?.classList.remove(_isAnimate)
+      }, 500)
     }
-
-    animTimeoutIDRef.current = setTimeout(() => {
-      setIsAnimStart(false)
-    }, 500)
   }
 
   const nextSlideHandler = () => {
     setActiveSlideIndex((prev) => prev + 1)
-    animationSlideInfoHandler()
+    animateSlideInfoHandler()
 
     if (activeSlideIndex === sliderDataRef.current.length - 1) {
       setTransformX(startPositionRef.current)
@@ -134,7 +140,7 @@ const Intro = () => {
 
   const prevSlideHandler = () => {
     setActiveSlideIndex((prev) => prev - 1)
-    animationSlideInfoHandler()
+    animateSlideInfoHandler()
 
     if (activeSlideIndex === 0) {
       setTransformX(
@@ -155,11 +161,11 @@ const Intro = () => {
     setActiveSlideIndex(
       sliderDataRef.current.findIndex((slide) => slide.id === id)
     )
-    animationSlideInfoHandler()
+    animateSlideInfoHandler()
   }
 
   return (
-    <div className={intro}>
+    <section className={intro}>
       <div className={setStaticClasses([intro__inner, '_container'])}>
         <div className={introControls}>
           <div className={introControlsDots}>
@@ -243,13 +249,7 @@ const Intro = () => {
           </div>
         </div>
       </div>
-      <div
-        className={setDynamicClasses({
-          staticClasses: [introSlideInfo],
-          dynamicClasses: [[_isAnimate]],
-          conditions: [isAnimStart],
-        })}
-      >
+      <div className={introSlideInfo} ref={introSlideInfoRef}>
         <div className={introSlideInfo__inner}>
           <div className={introSlideInfoHead}>
             {sliderDataRef.current[activeSlideIndex].title}
@@ -365,7 +365,7 @@ const Intro = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   )
 }
 

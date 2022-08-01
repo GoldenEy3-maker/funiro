@@ -258,13 +258,15 @@
 
       transition: opacity 0.3s ease, visibility 0.3s ease;
 
-      &::-webkit-scrollbar {
-        width: 8px;
-      }
+      @media screen and (min-width: 991.98px) {
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
 
-      &::-webkit-scrollbar-thumb {
-        background-color: hsl(var(--base-primary-orange-color), 75%);
-        border-radius: 40px;
+        &::-webkit-scrollbar-thumb {
+          background-color: hsl(var(--base-primary-orange-color), 75%);
+          border-radius: 40px;
+        }
       }
 
       ._isResultsListShow & {

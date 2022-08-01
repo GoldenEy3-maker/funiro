@@ -2,7 +2,9 @@
   --base-default-color: 0, 0%;
   --base-primary-orange-color: 23, 72%;
   --base-secondary-orange-color: 32, 57%;
-  --base-red-color: 0, 100%;
+  --base-red-color: 0, 73%;
+  --base-gray-color: 220, 16%;
+  --base-green-color: 171, 62%;
 
   --black-color-hsl: hsl(var(--base-default-color), 0%);
   --white-color-hsl: hsl(var(--base-default-color), 100%);
@@ -13,8 +15,10 @@
   );
   --primary-orange-color-hsl: hsl(var(--base-primary-orange-color), 68%);
   --secondary-orange-color-hsl: hsl(var(--base-secondary-orange-color), 97%);
-  --red-color-hsl: hsl(var(--base-red-color), 80%);
+  --red-color-hsl: hsl(var(--base-red-color), 68%);
   --secondary-text-color-hsl: hsl(var(--base-default-color), 54%);
+  --gray-color-hsl: hsl(var(--base-gray-color), 96%);
+  --green-color-hsl: hsl(var(--base-green-color), 47%);
 
   --max-width: 1920;
 

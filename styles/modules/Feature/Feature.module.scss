@@ -1,0 +1,42 @@
+@import '../../function.scss';
+
+.feature {
+  padding: adaptive-clamp(60, 100) 0;
+
+  &__inner {
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 50px;
+  }
+
+  &Item {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    &__icon {
+    }
+
+    &Info {
+      display: flex;
+      flex-direction: column;
+
+      &__title {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 27px;
+      }
+      &__text {
+        line-height: 24px;
+
+        color: var(--secondary-text-color-hsl);
+      }
+    }
+  }
+}

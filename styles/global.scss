@@ -89,7 +89,7 @@ input[type='search']::-webkit-search-results-decoration {
   display: flex;
   flex-direction: column;
 
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 ._container {
@@ -120,4 +120,14 @@ input[type='search']::-webkit-search-results-decoration {
 
     color: var(--white-color-hsl);
   }
+}
+
+._section-title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+
+  text-align: center;
+
+  color: var(--black-color-hsl);
 }

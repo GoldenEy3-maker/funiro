@@ -1,7 +1,9 @@
+@import '../../function.scss';
 @import './var';
 
 .intro {
   position: relative;
+  z-index: 1;
 
   padding-top: 160px;
 
@@ -13,6 +15,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
 
     width: 60%;
     height: 100%;
@@ -265,6 +268,7 @@
       align-items: center;
 
       gap: 32px;
+
     }
   }
 

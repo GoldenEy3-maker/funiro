@@ -16,9 +16,9 @@
 
     gap: 15px;
 
-    background-color: hsl(var(--base-default-color), 98%);
+    background-color: var(--white-color-hsl);
 
-    box-shadow: 0 0 10px rgba(#000, 0.15);
+    box-shadow: 0 0 10px rgba(#000, 0.1);
 
     border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
 
@@ -86,7 +86,7 @@
 
     background-color: var(--white-color-hsl);
 
-    box-shadow: 0 0 10px rgba(#000, 0.15);
+    box-shadow: 0 0 10px rgba(#000, 0.1);
 
     border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
 
