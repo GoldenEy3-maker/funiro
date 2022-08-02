@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image, { StaticImageData } from 'next/image'
+import { StaticImageData } from 'next/image'
 
 import { useRef } from 'react'
 
@@ -39,7 +39,7 @@ const {
   productsContent,
   productsContent__list,
 
-  products__link,
+  products__link
 } = styles
 
 const Products = () => {
@@ -53,7 +53,7 @@ const Products = () => {
       prevPrice: 'Rp 3.500.000',
       discount: '-30%',
       isNew: false,
-      href: '/',
+      href: '/'
     },
     {
       id: uuidv4(),
@@ -64,7 +64,7 @@ const Products = () => {
       prevPrice: '',
       discount: '-30%',
       isNew: false,
-      href: '/',
+      href: '/'
     },
     {
       id: uuidv4(),
@@ -75,7 +75,7 @@ const Products = () => {
       prevPrice: 'Rp 14.000.000',
       discount: '-50%',
       isNew: false,
-      href: '/',
+      href: '/'
     },
     {
       id: uuidv4(),
@@ -86,7 +86,7 @@ const Products = () => {
       prevPrice: '',
       discount: '',
       isNew: true,
-      href: '/',
+      href: '/'
     },
     {
       id: uuidv4(),
@@ -97,7 +97,7 @@ const Products = () => {
       prevPrice: '',
       discount: '',
       isNew: false,
-      href: '/',
+      href: '/'
     },
     {
       id: uuidv4(),
@@ -108,7 +108,7 @@ const Products = () => {
       prevPrice: '',
       discount: '',
       isNew: true,
-      href: '/',
+      href: '/'
     },
     {
       id: uuidv4(),
@@ -119,7 +119,7 @@ const Products = () => {
       prevPrice: 'Rp 14.000.000',
       discount: '-50%',
       isNew: false,
-      href: '/',
+      href: '/'
     },
     {
       id: uuidv4(),
@@ -130,25 +130,25 @@ const Products = () => {
       prevPrice: '',
       discount: '',
       isNew: true,
-      href: '/',
-    },
+      href: '/'
+    }
   ])
   return (
-    <section className={products}>
-      <div className={setStaticClasses([products__inner, '_container'])}>
-        <h1 className={setStaticClasses([products__title, '_section-title'])}>
+    <section className={ products }>
+      <div className={ setStaticClasses([products__inner, '_container']) }>
+        <h1 className={ setStaticClasses([products__title, '_section-title']) }>
           Our Products
         </h1>
-        <div className={productsContent}>
-          <ul className={productsContent__list}>
-            {productDataRef.current.length > 0 &&
+        <div className={ productsContent }>
+          <ul className={ productsContent__list }>
+            { productDataRef.current.length > 0 &&
               productDataRef.current.map((product) => (
-                <ProductItem key={product.id} product={product} />
-              ))}
+                <ProductItem key={ product.id } product={ product }/>
+              )) }
           </ul>
         </div>
-        <div className={products__link}>
-          <Link href='/'>
+        <div className={ products__link }>
+          <Link href="/">
             <a>Show More</a>
           </Link>
         </div>

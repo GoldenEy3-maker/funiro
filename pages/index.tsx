@@ -5,6 +5,7 @@ import { MainLayout } from '../components/layout/Main'
 import Intro from '../components/Intro/Intro'
 import Feature from '../components/Feature/Feature'
 import Products from '../components/Products/Products'
+import Footer from '../components/Footer/Footer'
 
 const HomePage: NextPage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage: NextPage = () => {
       <Intro />
       <Feature />
       <Products />
+      <Footer />
     </MainLayout>
   )
 }
