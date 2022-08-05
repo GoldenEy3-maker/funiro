@@ -30,6 +30,48 @@ const handler: IEndpoint<IResponseData<IProductsData[] | null>> = async (req, re
     }, {
       id: uuidV4(),
       title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
+    }, {
+      id: uuidV4(),
+      title: 'Product 7'
     }
   ]
 

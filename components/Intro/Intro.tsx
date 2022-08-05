@@ -1,20 +1,19 @@
-import Image, { StaticImageData } from 'next/image'
+import { TIntervalTimer } from '../../typescript/type'
 
+import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
 import { useEffect, useRef, useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { TIntervalTimer } from '../../typescript/type'
+import { useWindow } from '../../hooks/window.hook'
 
 import { setDynamicClasses, setStaticClasses } from '../../lib/classes.lib'
 
 import styles from '../../styles/modules/Intro/Intro.module.scss'
 
 import Slide1 from '../../public/images/slide1.jpg'
-import { resize } from 'next/dist/server/lib/squoosh/impl'
-import { useWindow } from '../../hooks/window.hook'
 
 interface IIntroSliderData {
   id: string
@@ -32,8 +31,7 @@ const {
   introControlsDots,
   introControlsDots__list,
   introControlsDotsItem,
-  introControlsArrows,
-  introControlsArrows__btn,
+  introControlsArrow,
   introInfo,
   introInfo__title,
   introInfo__text,
@@ -105,7 +103,7 @@ const Intro = () => {
   const introSlideInfoRef = useRef<HTMLDivElement>(null)
   const animTimeoutIDRef = useRef<TIntervalTimer>()
 
-  const { adaptiveValue, windowWidth } = useWindow()
+  const { adaptiveValue } = useWindow()
 
   const animateSlideInfoHandler = () => {
     if (introSlideInfoRef.current) {
@@ -172,6 +170,25 @@ const Intro = () => {
     <section className={ intro }>
       <div className={ setStaticClasses([intro__inner, '_container']) }>
         <div className={ introControls }>
+          <div className={ introControlsArrow }>
+            <button type="button" onClick={ prevSlideHandler }>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.9999 4.99999L7.99988 12L14.9999 19"
+                  stroke="#000"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
           <div className={ introControlsDots }>
             <ul className={ introControlsDots__list }>
               { sliderDataRef.current &&
@@ -197,45 +214,24 @@ const Intro = () => {
                 )) }
             </ul>
           </div>
-          <div className={ introControlsArrows }>
-            <div className={ introControlsArrows__btn }>
-              <button type="button" onClick={ prevSlideHandler }>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.9999 4.99999L7.99988 12L14.9999 19"
-                    stroke="#000"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className={ introControlsArrows__btn }>
-              <button type="button" onClick={ nextSlideHandler }>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.00012 4.99999L16.0001 12L9.00012 19"
-                    stroke="#000"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
+          <div className={ introControlsArrow }>
+            <button type="button" onClick={ nextSlideHandler }>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.00012 4.99999L16.0001 12L9.00012 19"
+                  stroke="#000"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
         </div>
         <div className={ introInfo }>

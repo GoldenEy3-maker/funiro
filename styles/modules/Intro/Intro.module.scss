@@ -5,7 +5,7 @@
   position: relative;
   z-index: 1;
 
-  padding-top: 160px;
+  padding-top: adaptive-clamp(90, 160, 675);
 
   background-color: var(--secondary-orange-color-hsl);
 
@@ -125,57 +125,57 @@
       }
     }
 
-    &Arrows {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      &__btn {
+    &Arrow {
+      &:first-child {
         button {
-          cursor: pointer;
+          background-color: hsl(var(--base-primary-orange-color), 90%);
+        }
+      }
 
-          display: flex;
-          align-items: center;
-          justify-content: center;
+      button {
+        cursor: pointer;
 
-          width: 50px;
-          height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-          border-radius: 50%;
+        width: adaptive-clamp(45, 50);
+        height: adaptive-clamp(45, 50);
 
-          background-color: hsl(var(--base-primary-orange-color), 93%);
-          border: none;
+        border-radius: 50%;
 
-          transition: background-color 0.2s ease;
+        background-color: hsl(var(--base-primary-orange-color), 93%);
+        border: none;
 
-          svg {
-            path {
-              stroke: var(--primary-orange-color-hsl);
+        transition: background-color 0.2s ease;
 
-              transition: stroke 0.2s ease;
+        svg {
+          path {
+            stroke: var(--primary-orange-color-hsl);
+
+            transition: stroke 0.2s ease;
+          }
+        }
+
+        @media screen and (min-width: 991.98px) {
+          &:hover {
+            background-color: var(--primary-orange-color-hsl);
+
+            svg {
+              path {
+                stroke: var(--white-color-hsl);
+              }
             }
           }
 
-          @media screen and (min-width: 991.98px) {
-            &:hover {
-              background-color: var(--primary-orange-color-hsl);
+          &:focus {
+            outline: none;
 
-              svg {
-                path {
-                  stroke: var(--white-color-hsl);
-                }
-              }
-            }
+            background-color: var(--primary-orange-color-hsl);
 
-            &:focus {
-              outline: none;
-
-              background-color: var(--primary-orange-color-hsl);
-
-              svg {
-                path {
-                  stroke: var(--white-color-hsl);
-                }
+            svg {
+              path {
+                stroke: var(--white-color-hsl);
               }
             }
           }
@@ -273,32 +273,33 @@
   }
 
   &Slider {
-    margin-top: 30px;
+    margin-top: adaptive-clamp(30, 15);
 
     &__list {
       display: flex;
       align-items: center;
 
       gap: adaptive-clamp(24, 32);
-
     }
-
-    &Item {
-
-    }
-
   }
 
   &SlideInfo {
     position: absolute;
-    bottom: 30px;
-    right: adaptive-clamp(12, 350);
+    bottom: adaptive-clamp(-50, 30);
+    right: adaptive-clamp(30, 350, 460);
     z-index: 10;
 
     width: 100%;
-    max-width: 300px;
+    max-width: adaptive-value(300, 400, 460);
 
     transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+
+    @media (max-width: 460px) {
+      right: adaptive-clamp(8, 30, 320, 460);
+
+      max-width: adaptive-clamp(305, 400, 320, 460);
+
+    }
 
     &._isAnimate {
       transform: scale(0.8);
@@ -378,16 +379,14 @@
       }
     }
 
-    @media (max-width: 768px) {
-      bottom: 185px
-    }
   }
 
-  @media (max-width: 991.98px) {
-    padding-top: 120px;
-  }
-
-  @media (max-width: 675px) {
-    padding-top: 100px;
-  }
+  //
+  //@media (max-width: 991.98px) {
+  //  padding-top: 100px;
+  //}
+  //
+  //@media (max-width: 675px) {
+  //  padding-top: 90px;
+  //}
 }

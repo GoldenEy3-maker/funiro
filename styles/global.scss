@@ -14,10 +14,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  overflow-x: hidden;
-
-}
 
 body {
   font-family: var(--default-font-family);
@@ -28,8 +24,6 @@ body {
   color: var(--black-color-hsl);
 
   scroll-behavior: smooth;
-
-  overflow-x: hidden;
 
   &[data-lock-scroll] {
     overflow: hidden;
