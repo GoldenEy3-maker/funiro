@@ -1,5 +1,5 @@
 @import '../../function.scss';
-@import './var';
+@import './var.scss';
 
 .intro {
   position: relative;
@@ -35,14 +35,14 @@
 
     gap: 15px;
 
-    padding-left: calc(#{$intro-info-max-width + px} + 32px);
+    padding-left: adaptive-clamp(370 + 32, $intro-info-max-width + 32, 991.98);
 
     &Dots {
       &__list {
         display: flex;
         align-items: center;
 
-        gap: 10px;
+        gap: adaptive-clamp(5, 10);
       }
 
       &Item {
@@ -67,8 +67,8 @@
           align-items: center;
           justify-content: center;
 
-          width: 30px;
-          height: 30px;
+          width: adaptive-clamp(20, 30);
+          height: adaptive-clamp(20, 30);
 
           background-color: transparent;
 
@@ -77,8 +77,8 @@
           border: none;
 
           span {
-            width: 10px;
-            height: 10px;
+            width: adaptive-clamp(8, 10);
+            height: adaptive-clamp(8, 10);
 
             background-color: hsl(var(--base-default-color), 85%);
 
@@ -182,6 +182,10 @@
         }
       }
     }
+
+    @media (max-width: 991.98px) {
+      padding-left: 0;
+    }
   }
 
   &Info {
@@ -195,47 +199,47 @@
     display: flex;
     flex-direction: column;
 
-    gap: #{$flex-gap + px};
+    gap: adaptive-clamp(10, $flex-gap, 991.98);
 
     border-radius: var(--default-border-radius);
 
-    padding: 60px;
+    padding: adaptive-clamp(30, 60, 991.98);
 
-    max-width: 500px;
+    max-width: adaptive-clamp(370, 500, 991.98);
 
     background-color: rgba(white, 0.72);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(adaptive-clamp(3, 10, 991.98));
 
     box-shadow: 0 0 10px rgba(#000, 0.1);
 
     &__title {
-      font-size: 56px;
+      font-size: adaptive-clamp(40, 56, 991.98);
       font-weight: 700;
-      line-height: 67px;
+      line-height: adaptive-clamp(46, 67, 991.98);
     }
 
     &__text {
       color: var(--secondary-text-color-hsl);
 
-      font-size: 20px;
-      line-height: 30px;
+      font-size: adaptive-clamp(18, 20, 991.98);
+      line-height: adaptive-clamp(25, 30, 991.98);
     }
 
     &__link {
-      margin-top: calc(#{$link-margin-top + px} - #{$flex-gap + px});
+      margin-top: adaptive-clamp(20, $link-margin-top - $flex-gap, 991.98);
 
       a {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        padding: 24px 0;
+        padding: adaptive-clamp(20, 24, 991.98) 0;
 
-        font-size: 20px;
+        font-size: adaptive-clamp(18, 20, 991.98);
 
         transition: background-color 0.2s ease, transform 0.1s ease,
-          box-shadow 0.2s ease;
+        box-shadow 0.2s ease;
 
         @media screen and (min-width: 991.98px) {
           &:hover {
@@ -258,6 +262,14 @@
         }
       }
     }
+
+    @media (max-width: 1300px) {
+      left: 15px;
+    }
+
+    @media (max-width: 991.98px) {
+      display: none;
+    }
   }
 
   &Slider {
@@ -267,15 +279,20 @@
       display: flex;
       align-items: center;
 
-      gap: 32px;
+      gap: adaptive-clamp(24, 32);
 
     }
+
+    &Item {
+
+    }
+
   }
 
   &SlideInfo {
     position: absolute;
     bottom: 30px;
-    right: 20%;
+    right: adaptive-clamp(12, 350);
     z-index: 10;
 
     width: 100%;
@@ -306,7 +323,7 @@
 
       background-color: rgba(white, 0.72);
 
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(adaptive-clamp(2, 10));
 
       box-shadow: 0 0 10px rgba(#000, 0.1);
 
@@ -321,9 +338,9 @@
     }
 
     &Head {
-      font-size: 28px;
+      font-size: adaptive-clamp(25, 28);
       font-weight: 600;
-      line-height: 33px;
+      line-height: adaptive-clamp(28, 33);
     }
 
     &Body {
@@ -338,7 +355,7 @@
 
       gap: 15px;
 
-      margin-top: 10px;
+      margin-top: adaptive-clamp(0, 10);
 
       &__price {
         font-size: 20px;
@@ -359,6 +376,10 @@
           }
         }
       }
+    }
+
+    @media (max-width: 768px) {
+      bottom: 185px
     }
   }
 
