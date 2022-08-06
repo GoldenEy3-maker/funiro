@@ -132,3 +132,91 @@ input[type='search']::-webkit-search-results-decoration {
 
   color: var(--black-color-hsl);
 }
+
+._sliderDots {
+  &__list {
+    display: flex;
+    align-items: center;
+
+    gap: adaptive-clamp(5, 10);
+  }
+
+  &__item {
+    &._activeDot {
+      button {
+        &:before {
+          transform: scale(1);
+        }
+
+        span {
+          background-color: var(--primary-orange-color-hsl);
+        }
+      }
+    }
+
+    button {
+      position: relative;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 30px;
+      height: 30px;
+
+      background-color: transparent;
+
+      border-radius: 50%;
+
+      border: none;
+
+      span {
+        width: 10px;
+        height: 10px;
+
+        background-color: hsl(var(--base-default-color), 85%);
+
+        border-radius: 50%;
+
+        transition: background-color 0.2s ease;
+      }
+
+      &:before {
+        content: '';
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        border-radius: 50%;
+
+        border: 2px solid var(--primary-orange-color-hsl);
+
+        transform: scale(0);
+
+        transition: transform 0.3s ease;
+      }
+
+      @media screen and (min-width: 991.98px) {
+        &:hover {
+          span {
+            background-color: var(--primary-orange-color-hsl);
+          }
+        }
+
+        &:focus {
+          outline: none;
+
+          span {
+            background-color: var(--primary-orange-color-hsl);
+          }
+        }
+      }
+    }
+  }
+}

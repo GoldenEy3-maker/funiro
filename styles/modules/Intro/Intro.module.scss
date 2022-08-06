@@ -39,88 +39,13 @@
 
     &Dots {
       &__list {
-        display: flex;
-        align-items: center;
 
-        gap: adaptive-clamp(5, 10);
       }
 
       &Item {
-        &._activeDot {
-          button {
-            &:before {
-              transform: scale(1);
-            }
 
-            span {
-              background-color: var(--primary-orange-color-hsl);
-            }
-          }
-        }
 
         button {
-          position: relative;
-
-          cursor: pointer;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          width: adaptive-clamp(20, 30);
-          height: adaptive-clamp(20, 30);
-
-          background-color: transparent;
-
-          border-radius: 50%;
-
-          border: none;
-
-          span {
-            width: adaptive-clamp(8, 10);
-            height: adaptive-clamp(8, 10);
-
-            background-color: hsl(var(--base-default-color), 85%);
-
-            border-radius: 50%;
-
-            transition: background-color 0.2s ease;
-          }
-
-          &:before {
-            content: '';
-
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            border-radius: 50%;
-
-            border: 2px solid var(--primary-orange-color-hsl);
-
-            transform: scale(0);
-
-            transition: transform 0.3s ease;
-          }
-
-          @media screen and (min-width: 991.98px) {
-            &:hover {
-              span {
-                background-color: var(--primary-orange-color-hsl);
-              }
-            }
-
-            &:focus {
-              outline: none;
-
-              span {
-                background-color: var(--primary-orange-color-hsl);
-              }
-            }
-          }
         }
       }
     }
@@ -250,8 +175,6 @@
             outline: none;
 
             background-color: hsl(var(--base-primary-orange-color), 60%);
-
-            box-shadow: 0 0 10px rgba(#000, 0.2);
           }
         }
 

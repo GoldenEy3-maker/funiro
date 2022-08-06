@@ -46,12 +46,10 @@ const {
   introSlideInfoFooter,
   introSlideInfoFooter__price,
   introSlideInfoFooter__link,
-  _activeDot,
   _isAnimate
 } = styles
 
 const Intro = () => {
-
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
   const [transformX, setTransformX] = useState<number | null>(null)
   const [slideWidth, setSlideWidth] = useState(934)
@@ -189,16 +187,16 @@ const Intro = () => {
               </svg>
             </button>
           </div>
-          <div className={ introControlsDots }>
-            <ul className={ introControlsDots__list }>
+          <div className={ setStaticClasses([introControlsDots, '_sliderDots']) }>
+            <ul className={ setStaticClasses([introControlsDots__list, '_sliderDots__list']) }>
               { sliderDataRef.current &&
                 sliderDataRef.current.length > 0 &&
                 sliderDataRef.current.map((slide) => (
                   <li
                     key={ slide.id }
                     className={ setDynamicClasses({
-                      staticClasses: [introControlsDotsItem],
-                      dynamicClasses: [[_activeDot]],
+                      staticClasses: [introControlsDotsItem, '_sliderDots__item'],
+                      dynamicClasses: [['_activeDot']],
                       conditions: [
                         slide.id === sliderDataRef.current[activeSlideIndex].id
                       ]

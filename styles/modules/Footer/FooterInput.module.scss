@@ -8,6 +8,8 @@
 
   &__input {
     position: relative;
+    width: 100%;
+    height: 100%;
 
     &._typing {
       label {
@@ -20,6 +22,11 @@
 
     label {
       pointer-events: none;
+
+      max-width: 190px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
 
       position: absolute;
       top: 50%;
