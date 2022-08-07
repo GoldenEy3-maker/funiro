@@ -1,3 +1,5 @@
+@import '../../function.scss';
+
 .tipsTricks {
   padding: 44px 0;
 
@@ -16,11 +18,11 @@
     transform: translate(0, -50%);
 
     &._prevArrow {
-      left: -10px;
+      left: 0;
     }
 
     &._nextArrow {
-      right: -10px;
+      right: 0;
     }
 
     button {
@@ -92,18 +94,28 @@
   }
 
   &Slider {
-    margin: 32px 0 25px;
+    padding: 32px 0 25px;
 
     overflow: hidden;
 
     &__list {
       display: flex;
 
-      gap: 32px;
+      gap: adaptive-clamp(15, 32);
     }
 
     &Item {
-      flex: 0 0 calc(33% - 17px);
+      flex: 0 0 adaptive-clamp(290, 391);
+
+      overflow: hidden;
+      
+      border-radius: var(--default-border-radius);
+
+      transition: box-shadow 0.4s ease;
+
+      &._activeSlide {
+        box-shadow: 0 0 10px rgba(black, 0.1);
+      }
 
       &__picture {
       }

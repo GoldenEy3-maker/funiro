@@ -14,7 +14,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-
 body {
   font-family: var(--default-font-family);
   font-size: var(--default-font-size);
@@ -103,7 +102,6 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 .page-content {
-
 }
 
 ._primary-link {
@@ -124,9 +122,9 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 ._section-title {
-  font-size: 40px;
+  font-size: adaptive-clamp(35, 40);
   font-weight: 700;
-  line-height: 48px;
+  line-height: adaptive-clamp(40, 48);
 
   text-align: center;
 

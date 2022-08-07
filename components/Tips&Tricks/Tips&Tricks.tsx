@@ -39,12 +39,14 @@ const {
   tipsTricksArrow,
   _prevArrow,
   _nextArrow,
+  _activeSlide,
 } = styles
 
 const TipsTricks = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [forceTransformX, setForceTransformX] = useState<number | null>(null)
   const [slideWidth, setSlideWidth] = useState(391)
+  const [tresholdSlideValue, setTresholdSlideValue] = useState(0)
   const [gapSlidesValue, setGapSlidesValue] = useState(32)
 
   const tipsTricksSliderDataRef = useRef<ITipsTricksSliderData[]>([
@@ -74,7 +76,7 @@ const TipsTricks = () => {
     },
   ])
 
-  const { adaptiveValue } = useWindow()
+  const { adaptiveValue, windowWidth } = useWindow()
 
   const prevSlideHandler = () => {
     setActiveIndex((prev) => prev - 1)
@@ -83,6 +85,7 @@ const TipsTricks = () => {
       setForceTransformX(
         slideWidth +
           gapSlidesValue +
+          tresholdSlideValue +
           tipsTricksSliderDataRef.current.length * (slideWidth + gapSlidesValue)
       )
 
@@ -98,7 +101,7 @@ const TipsTricks = () => {
     setActiveIndex((prev) => prev + 1)
 
     if (activeIndex === tipsTricksSliderDataRef.current.length - 1) {
-      setForceTransformX(0)
+      setForceTransformX(tresholdSlideValue < 0 ? 0 : tresholdSlideValue)
 
       setTimeout(() => {
         setForceTransformX(null)
@@ -115,8 +118,23 @@ const TipsTricks = () => {
   }
 
   useEffect(() => {
-    setSlideWidth(adaptiveValue(305, 391))
+    setSlideWidth(adaptiveValue(290, 391))
+    setGapSlidesValue(adaptiveValue(15, 32))
   }, [adaptiveValue])
+
+  useEffect(() => {
+    if (windowWidth >= 1200) {
+      setTresholdSlideValue(adaptiveValue(-40, 0, 1200))
+    } else if (windowWidth >= 991.98 && windowWidth <= 1200) {
+      setTresholdSlideValue(adaptiveValue(50, -40, 991.98, 1200))
+    } else if (windowWidth >= 675 && windowWidth <= 991.98) {
+      setTresholdSlideValue(adaptiveValue(180, 50, 675, 991.98))
+    } else if (windowWidth >= 320 && windowWidth <= 675) {
+      setTresholdSlideValue(
+        adaptiveValue(slideWidth + gapSlidesValue, 180, 320, 675)
+      )
+    }
+  }, [adaptiveValue, windowWidth, slideWidth, gapSlidesValue])
 
   return (
     <section className={tipsTricks}>
@@ -150,10 +168,10 @@ const TipsTricks = () => {
               transform: `translateX(-${
                 forceTransformX !== null
                   ? forceTransformX
-                  : adaptiveValue(305, slideWidth) +
+                  : slideWidth +
                     gapSlidesValue +
-                    activeIndex *
-                      (adaptiveValue(305, slideWidth) + gapSlidesValue)
+                    tresholdSlideValue +
+                    activeIndex * (slideWidth + gapSlidesValue)
               }px)`,
               transition:
                 forceTransformX !== null ? undefined : 'transform .4s ease',
@@ -169,7 +187,7 @@ const TipsTricks = () => {
                   }
                   alt='slide picture'
                   width={adaptiveValue(
-                    305,
+                    290,
                     tipsTricksSliderDataRef.current[
                       tipsTricksSliderDataRef.current.length - 2
                     ].image.width
@@ -218,7 +236,7 @@ const TipsTricks = () => {
                   }
                   alt='slide picture'
                   width={adaptiveValue(
-                    305,
+                    290,
                     tipsTricksSliderDataRef.current[
                       tipsTricksSliderDataRef.current.length - 1
                     ].image.width
@@ -259,12 +277,22 @@ const TipsTricks = () => {
             </li>
             {tipsTricksSliderDataRef.current.length > 0 &&
               tipsTricksSliderDataRef.current.map((slide) => (
-                <li key={slide.id} className={tipsTricksSliderItem}>
+                <li
+                  key={slide.id}
+                  className={setDynamicClasses({
+                    staticClasses: [tipsTricksSliderItem],
+                    dynamicClasses: [[_activeSlide]],
+                    conditions: [
+                      slide.id ===
+                        tipsTricksSliderDataRef.current[activeIndex].id,
+                    ],
+                  })}
+                >
                   <div className={tipsTricksSliderItem__picture}>
                     <Image
                       src={slide.image.src}
                       alt='slide picture'
-                      width={adaptiveValue(305, slide.image.width)}
+                      width={adaptiveValue(290, slide.image.width)}
                       height={adaptiveValue(200, slide.image.height)}
                       objectFit='cover'
                       layout='fixed'
@@ -289,7 +317,7 @@ const TipsTricks = () => {
                   src={tipsTricksSliderDataRef.current[0].image.src}
                   alt='slide picture'
                   width={adaptiveValue(
-                    305,
+                    290,
                     tipsTricksSliderDataRef.current[0].image.width
                   )}
                   height={adaptiveValue(
@@ -318,7 +346,7 @@ const TipsTricks = () => {
                   src={tipsTricksSliderDataRef.current[1].image.src}
                   alt='slide picture'
                   width={adaptiveValue(
-                    305,
+                    290,
                     tipsTricksSliderDataRef.current[1].image.width
                   )}
                   height={adaptiveValue(
