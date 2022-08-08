@@ -48,6 +48,7 @@ const TipsTricks = () => {
   const [slideWidth, setSlideWidth] = useState(391)
   const [tresholdSlideValue, setTresholdSlideValue] = useState(0)
   const [gapSlidesValue, setGapSlidesValue] = useState(32)
+  const [isDisabledButtons, setIsDisabledButtons] = useState(false)
 
   const tipsTricksSliderDataRef = useRef<ITipsTricksSliderData[]>([
     {
@@ -75,10 +76,13 @@ const TipsTricks = () => {
       date: '2020-12-30',
     },
   ])
+  const transitionDurationRef = useRef(500)
 
   const { adaptiveValue, windowWidth } = useWindow()
 
   const prevSlideHandler = () => {
+    setIsDisabledButtons(true)
+
     setActiveIndex((prev) => prev - 1)
 
     if (activeIndex === 0) {
@@ -95,9 +99,15 @@ const TipsTricks = () => {
 
       setActiveIndex(tipsTricksSliderDataRef.current.length - 1)
     }
+
+    setTimeout(() => {
+      setIsDisabledButtons(false)
+    }, transitionDurationRef.current)
   }
 
   const nextSlideHandler = () => {
+    setIsDisabledButtons(true)
+
     setActiveIndex((prev) => prev + 1)
 
     if (activeIndex === tipsTricksSliderDataRef.current.length - 1) {
@@ -109,6 +119,10 @@ const TipsTricks = () => {
 
       setActiveIndex(0)
     }
+
+    setTimeout(() => {
+      setIsDisabledButtons(false)
+    }, transitionDurationRef.current)
   }
 
   const clickDotHandler = (id: string) => {
@@ -123,17 +137,17 @@ const TipsTricks = () => {
   }, [adaptiveValue])
 
   useEffect(() => {
-    if (windowWidth >= 1200) {
-      setTresholdSlideValue(adaptiveValue(-40, 0, 1200))
-    } else if (windowWidth >= 991.98 && windowWidth <= 1200) {
-      setTresholdSlideValue(adaptiveValue(50, -40, 991.98, 1200))
-    } else if (windowWidth >= 675 && windowWidth <= 991.98) {
-      setTresholdSlideValue(adaptiveValue(180, 50, 675, 991.98))
-    } else if (windowWidth >= 320 && windowWidth <= 675) {
-      setTresholdSlideValue(
-        adaptiveValue(slideWidth + gapSlidesValue, 180, 320, 675)
-      )
-    }
+    setTresholdSlideValue((prev) => {
+      if (windowWidth >= 1200) return adaptiveValue(-40, 0, 1200)
+      if (windowWidth >= 991.98 && windowWidth <= 1200)
+        return adaptiveValue(50, -40, 991.98, 1200)
+      if (windowWidth >= 675 && windowWidth <= 991.98)
+        return adaptiveValue(180, 50, 675, 991.98)
+      if (windowWidth >= 320 && windowWidth <= 675)
+        return adaptiveValue(slideWidth + gapSlidesValue, 180, 320, 675)
+
+      return prev
+    })
   }, [adaptiveValue, windowWidth, slideWidth, gapSlidesValue])
 
   return (
@@ -143,7 +157,11 @@ const TipsTricks = () => {
           Tips & Tricks
         </h1>
         <div className={setStaticClasses([tipsTricksArrow, _prevArrow])}>
-          <button type='button' onClick={prevSlideHandler}>
+          <button
+            type='button'
+            onClick={prevSlideHandler}
+            disabled={isDisabledButtons}
+          >
             <svg
               width='24'
               height='24'
@@ -174,7 +192,9 @@ const TipsTricks = () => {
                     activeIndex * (slideWidth + gapSlidesValue)
               }px)`,
               transition:
-                forceTransformX !== null ? undefined : 'transform .4s ease',
+                forceTransformX !== null
+                  ? undefined
+                  : `transform ${transitionDurationRef.current}ms ease`,
             }}
           >
             <li className={tipsTricksSliderItem}>
@@ -372,7 +392,11 @@ const TipsTricks = () => {
           </ul>
         </div>
         <div className={setStaticClasses([tipsTricksArrow, _nextArrow])}>
-          <button type='button' onClick={nextSlideHandler}>
+          <button
+            type='button'
+            onClick={nextSlideHandler}
+            disabled={isDisabledButtons}
+          >
             <svg
               width='24'
               height='24'
