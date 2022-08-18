@@ -2,11 +2,12 @@ import type { NextPage } from 'next'
 
 import { MainLayout } from '../components/layout/Main'
 
-import Intro from '../components/Intro/Intro'
 import Feature from '../components/Feature/Feature'
+import Footer from '../components/Footer/Footer'
+import Intro from '../components/Intro/Intro'
 import Products from '../components/Products/Products'
 import TipsTricks from '../components/Tips&Tricks/Tips&Tricks'
-import Footer from '../components/Footer/Footer'
+import Gallery from '../components/Gallery/Gallery'
 
 const HomePage: NextPage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage: NextPage = () => {
       <Feature/>
       <Products/>
       <TipsTricks/>
+      <Gallery />
       <Footer/>
     </MainLayout>
   )

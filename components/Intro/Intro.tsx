@@ -333,14 +333,6 @@ const Intro = () => {
                   .src
               }
               alt=''
-              // width={
-              //   sliderDataRef.current[sliderDataRef.current.length - 2].image
-              //     .width
-              // }
-              // height={
-              //   sliderDataRef.current[sliderDataRef.current.length - 2].image
-              //     .height
-              // }
               width={adaptiveValue(
                 305,
                 sliderDataRef.current[sliderDataRef.current.length - 2].image
@@ -372,14 +364,6 @@ const Intro = () => {
                 sliderDataRef.current[sliderDataRef.current.length - 1].image
                   .height
               )}
-              // width={
-              //   sliderDataRef.current[sliderDataRef.current.length - 1].image
-              //     .width
-              // }
-              // height={
-              //   sliderDataRef.current[sliderDataRef.current.length - 1].image
-              //     .height
-              // }
               layout='fixed'
               objectFit='cover'
             />
@@ -393,8 +377,6 @@ const Intro = () => {
                   alt=''
                   width={adaptiveValue(305, slide.image.width)}
                   height={adaptiveValue(305, slide.image.height)}
-                  // width={ slide.image.width }
-                  // height={ slide.image.height }
                   layout='fixed'
                   objectFit='cover'
                 />
@@ -406,8 +388,6 @@ const Intro = () => {
               alt=''
               width={adaptiveValue(305, sliderDataRef.current[0].image.width)}
               height={adaptiveValue(305, sliderDataRef.current[0].image.height)}
-              // width={ sliderDataRef.current[0].image.width }
-              // height={ sliderDataRef.current[0].image.height }
               layout='fixed'
               objectFit='cover'
             />
@@ -418,8 +398,6 @@ const Intro = () => {
               alt=''
               width={adaptiveValue(305, sliderDataRef.current[1].image.width)}
               height={adaptiveValue(305, sliderDataRef.current[1].image.height)}
-              // width={ sliderDataRef.current[1].image.width }
-              // height={ sliderDataRef.current[1].image.height }
               layout='fixed'
               objectFit='cover'
             />
