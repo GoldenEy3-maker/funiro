@@ -23,7 +23,7 @@ const {
   galleryLayout,
   galleryLayout__top,
   galleryLayout__bottom,
-  _multi
+  gallery__content
 } = styles
 
 const Gallery = () => {
@@ -32,40 +32,43 @@ const Gallery = () => {
       <div className={ gallery__inner }>
         <h3 className={ gallery__subtitle }>Share your setup with</h3>
         <h1 className={ setStaticClasses([gallery__title, '_section-title']) }>#FuniroFurniture</h1>
-        <ul className={ gallery__list }>
-          <li className={ setStaticClasses([galleryLayout, _multi]) }>
-            <div className={ galleryLayout__top }>
-              <Image src={ Picture1.src } alt="gallery picture" width={ Picture1.width } height={ Picture1.height }
-                     objectFit="cover" layout='fixed'/>
-              <Image src={ Picture2.src } alt="gallery picture" width={ Picture2.width } height={ Picture2.height }
-                     objectFit="cover" layout='fixed'/>
-            </div>
-            <div className={ galleryLayout__bottom }>
-              <Image src={ Picture3.src } alt="gallery picture" width={ Picture3.width } height={ Picture3.height }
-                     objectFit="cover" layout='fixed'/>
-              <Image src={ Picture4.src } alt="gallery picture" width={ Picture4.width } height={ Picture4.height }
-                     objectFit="cover" layout='fixed'/>
-            </div>
-          </li>
-          <li className={ galleryLayout }>
-            <Image src={ Picture5.src } alt="gallery picture" width={ Picture5.width } height={ Picture5.height }
-                   objectFit="cover" layout='fixed'/>
-          </li>
-          <li className={ setStaticClasses([galleryLayout, _multi]) }>
-            <div className={ galleryLayout__top }>
-              <Image src={ Picture6.src } alt="gallery picture" width={ Picture6.width } height={ Picture6.height }
-                     objectFit="cover" layout='fixed'/>
-              <Image src={ Picture7.src } alt="gallery picture" width={ Picture7.width } height={ Picture7.height }
-                     objectFit="cover" layout='fixed'/>
-            </div>
-            <div className={ galleryLayout__bottom }>
-              <Image src={ Picture8.src } alt="gallery picture" width={ Picture8.width } height={ Picture8.height }
-                     objectFit="cover" layout='fixed'/>
-              <Image src={ Picture9.src } alt="gallery picture" width={ Picture9.width } height={ Picture9.height }
-                     objectFit="cover" layout='fixed'/>
-            </div>
-          </li>
-        </ul>
+        <div className={ gallery__content }>
+          <ul className={ gallery__list }>
+            <li className={ galleryLayout }>
+              <div className={ galleryLayout__top }>
+                <Image src={ Picture1.src } alt="gallery picture" width={ Picture1.width } height={ Picture1.height }
+                       objectFit="cover" layout="fixed"/>
+                <Image src={ Picture2.src } alt="gallery picture" width={ Picture2.width } height={ Picture2.height }
+                       objectFit="cover" layout="fixed"/>
+              </div>
+              <div className={ galleryLayout__bottom }>
+                <Image src={ Picture3.src } alt="gallery picture" width={ Picture3.width } height={ Picture3.height }
+                       objectFit="cover" layout="fixed"/>
+                <Image src={ Picture4.src } alt="gallery picture" width={ Picture4.width } height={ Picture4.height }
+                       objectFit="cover" layout="fixed"/>
+              </div>
+            </li>
+            <li className={ galleryLayout }>
+              <Image src={ Picture5.src } alt="gallery picture" width={ Picture5.width } height={ Picture5.height }
+                     objectFit="cover" layout="fixed"/>
+            </li>
+            <li className={ galleryLayout }>
+              <div className={ galleryLayout__top }>
+                <Image src={ Picture6.src } alt="gallery picture" width={ Picture6.width } height={ Picture6.height }
+                       objectFit="cover" layout="fixed"/>
+                <Image src={ Picture7.src } alt="gallery picture" width={ Picture7.width } height={ Picture7.height }
+                       objectFit="cover" layout="fixed"/>
+              </div>
+              <div className={ galleryLayout__bottom }>
+                <Image src={ Picture8.src } alt="gallery picture" width={ Picture8.width } height={ Picture8.height }
+                       objectFit="cover" layout="fixed"/>
+                <Image src={ Picture9.src } alt="gallery picture" width={ Picture9.width } height={ Picture9.height }
+                       objectFit="cover" layout="fixed"/>
+              </div>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </section>
   )
