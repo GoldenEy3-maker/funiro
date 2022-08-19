@@ -99,15 +99,12 @@ const Gallery = () => {
   }
 
   useEffect(() => {
-    if (galleryListRef.current) {
-      setIsListMoreThenWindow(galleryListRef.current.clientWidth < windowWidth)
-    }
+    if (galleryListRef.current) setIsListMoreThenWindow(galleryListRef.current.clientWidth < windowWidth)
   }, [windowWidth])
 
   useEffect(() => {
     if (isListMoreThenWindow) {
       setTranslateX(0)
-
       return
     }
 
@@ -130,7 +127,7 @@ const Gallery = () => {
           <ul className={ gallery__list } ref={ galleryListRef }
               style={ {
                 transform: `translateX(${ translateX }px)`,
-                transition: !isPressed ? 'transform .3s ease' : undefined
+                transition: !isPressed ? 'transform 500ms ease' : undefined
               } }>
             <li className={ galleryLayout }>
               <div className={ galleryLayout__top }>
