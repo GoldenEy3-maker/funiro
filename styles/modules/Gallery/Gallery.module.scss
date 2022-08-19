@@ -31,7 +31,7 @@
 
     gap: 15px;
 
-    overflow-x: auto;
+    //overflow-x: auto;
 
     &::-webkit-scrollbar {
       display: none;
@@ -43,6 +43,8 @@
     flex-direction: column;
 
     gap: inherit;
+
+    user-select: none;
 
     &__top {
       display: flex;
@@ -60,6 +62,9 @@
     }
 
     img {
+      pointer-events: none;
+      user-select: none;
+
       transition: transform 5s ease;
 
       &:hover {
