@@ -37,6 +37,7 @@ const Gallery = () => {
   const galleryListRef = useRef<HTMLUListElement>(null)
 
   const startTranslateXRef = useRef(0)
+  const startScrollPageYRef = useRef(0)
   const currentTranslateXRef = useRef(0)
 
   const mouseDownHandler = (event: MouseEvent<HTMLDivElement>) => {
@@ -66,16 +67,17 @@ const Gallery = () => {
         return prev
       })
     }
-
   }
 
   const touchStartHandler = (event: TouchEvent<HTMLDivElement>) => {
     setIsPressed(true)
 
     startTranslateXRef.current = event.changedTouches[0].clientX
+    startScrollPageYRef.current = window.scrollY
     currentTranslateXRef.current = translateX
   }
   const touchMoveHandler = (event: TouchEvent<HTMLDivElement>) => {
+    if (startScrollPageYRef.current > window.scrollY || startScrollPageYRef.current < window.scrollY) return
     if (!isPressed) return
     setTranslateX(prev => currentTranslateXRef.current - (startTranslateXRef.current - event.changedTouches[0].clientX))
   }
