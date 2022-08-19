@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { MouseEvent, TouchEvent, useState } from 'react'
+import { MouseEvent, TouchEvent, useEffect, useState } from 'react'
 
 import { setStaticClasses } from '../../lib/classes.lib'
 
@@ -16,6 +16,7 @@ import Picture7 from '../../public/images/gallery7.jpg'
 import Picture8 from '../../public/images/gallery8.jpg'
 import Picture9 from '../../public/images/gallery9.jpg'
 import { useRef } from 'react'
+import { useWindow } from '../../hooks/window.hook'
 
 const {
   gallery,
@@ -30,6 +31,7 @@ const {
 } = styles
 
 const Gallery = () => {
+  const [isListMoreThenWindow, setIsListMoreThenWindow] = useState(false)
   const [translateX, setTranslateX] = useState(0)
   const [isPressed, setIsPressed] = useState(false)
 
@@ -39,72 +41,92 @@ const Gallery = () => {
   const startTranslateXRef = useRef(0)
   const startScrollPageYRef = useRef(0)
   const currentTranslateXRef = useRef(0)
+  const maxTranslateXRef = useRef<number | undefined>(undefined)
+  const minTranslateXRef = useRef<number | undefined>(undefined)
+  const gapElementsRef = useRef(15)
 
-  const mouseDownHandler = (event: MouseEvent<HTMLDivElement>) => {
+  const { windowWidth } = useWindow()
+
+  const isEventTouch = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => event.type.includes('touch')
+
+  const getCurrentEvent = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+    if (isEventTouch(event)) {
+      const evt = event as TouchEvent<HTMLDivElement>
+      return evt.changedTouches[0]
+    }
+
+    return event as MouseEvent<HTMLDivElement>
+  }
+
+  const swipeStartHandler = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+    if (isListMoreThenWindow) return
+
+    const evt = getCurrentEvent(event)
+
     setIsPressed(true)
 
-    startTranslateXRef.current = event.clientX
+    startTranslateXRef.current = evt.clientX
     currentTranslateXRef.current = translateX
+
+    if (isEventTouch(event)) {
+      startScrollPageYRef.current = window.scrollY
+    }
   }
-  const mouseMoveHandler = (event: MouseEvent<HTMLDivElement>) => {
+
+  const swipeActionHandler = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+    if (isListMoreThenWindow) return
     if (!isPressed) return
+    if (isEventTouch(event) && (startScrollPageYRef.current > window.scrollY || startScrollPageYRef.current < window.scrollY)) return
+
+    const evt = getCurrentEvent(event)
 
     setTranslateX(prev =>
-      currentTranslateXRef.current - (startTranslateXRef.current - event.clientX)
+      currentTranslateXRef.current - (startTranslateXRef.current - evt.clientX)
     )
   }
-  const mouseUpHandler = (event: MouseEvent<HTMLDivElement>) => {
+
+  const swipeEndHandler = () => {
+    if (isListMoreThenWindow) return
+
     setIsPressed(false)
 
+    setTranslateX(prev => {
+      if (maxTranslateXRef.current && prev <= maxTranslateXRef.current) return maxTranslateXRef.current
+      if (minTranslateXRef.current && prev >= minTranslateXRef.current) return minTranslateXRef.current
+
+      return prev
+    })
+  }
+
+  useEffect(() => {
     if (galleryListRef.current) {
-      const maxTranslateX = -(galleryListRef.current.offsetWidth + 15) / 4
-      const minTranslateX = (galleryListRef.current.offsetWidth + 15) / 4
-
-      setTranslateX(prev => {
-        if (prev <= maxTranslateX) return maxTranslateX
-        if (prev >= minTranslateX) return minTranslateX
-
-        return prev
-      })
+      setIsListMoreThenWindow(galleryListRef.current.clientWidth < windowWidth)
     }
-  }
+  }, [windowWidth])
 
-  const touchStartHandler = (event: TouchEvent<HTMLDivElement>) => {
-    setIsPressed(true)
+  useEffect(() => {
+    if (isListMoreThenWindow) {
+      setTranslateX(0)
 
-    startTranslateXRef.current = event.changedTouches[0].clientX
-    startScrollPageYRef.current = window.scrollY
-    currentTranslateXRef.current = translateX
-  }
-  const touchMoveHandler = (event: TouchEvent<HTMLDivElement>) => {
-    if (startScrollPageYRef.current > window.scrollY || startScrollPageYRef.current < window.scrollY) return
-    if (!isPressed) return
-    setTranslateX(prev => currentTranslateXRef.current - (startTranslateXRef.current - event.changedTouches[0].clientX))
-  }
-  const touchEndHandler = (event: TouchEvent<HTMLDivElement>) => {
-    setIsPressed(false)
+      return
+    }
 
     if (galleryListRef.current) {
-      const maxTranslateX = -(galleryListRef.current.offsetWidth + 15) / 4
-      const minTranslateX = (galleryListRef.current.offsetWidth + 15) / 4
+      const { clientWidth: ListClientWidth, offsetLeft: ListOffsetLeft } = galleryListRef.current
 
-      setTranslateX(prev => {
-        if (prev <= maxTranslateX) return maxTranslateX
-        if (prev >= minTranslateX) return minTranslateX
-
-        return prev
-      })
+      maxTranslateXRef.current = -((ListClientWidth + ListOffsetLeft) + gapElementsRef.current) + windowWidth
+      minTranslateXRef.current = ((ListClientWidth + ListOffsetLeft) + gapElementsRef.current) - windowWidth
     }
-  }
+  }, [windowWidth, isListMoreThenWindow])
 
   return (
     <section className={ gallery }>
       <div className={ gallery__inner }>
         <h3 className={ gallery__subtitle }>Share your setup with</h3>
         <h1 className={ setStaticClasses([gallery__title, '_section-title']) }>#FuniroFurniture</h1>
-        <div className={ gallery__content } ref={ galleryContentRef } onMouseDown={ mouseDownHandler }
-             onMouseMove={ mouseMoveHandler } onMouseUp={ mouseUpHandler } onTouchStart={ touchStartHandler }
-             onTouchMove={ touchMoveHandler } onTouchEnd={ touchEndHandler }>
+        <div className={ gallery__content } ref={ galleryContentRef } onMouseDown={ swipeStartHandler }
+             onMouseMove={ swipeActionHandler } onMouseUp={ swipeEndHandler } onTouchStart={ swipeStartHandler }
+             onTouchMove={ swipeActionHandler } onTouchEnd={ swipeEndHandler }>
           <ul className={ gallery__list } ref={ galleryListRef }
               style={ {
                 transform: `translateX(${ translateX }px)`,
@@ -144,7 +166,6 @@ const Gallery = () => {
             </li>
           </ul>
         </div>
-
       </div>
     </section>
   )

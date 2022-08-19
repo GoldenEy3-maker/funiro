@@ -62,9 +62,6 @@
     }
 
     img {
-      pointer-events: none;
-      user-select: none;
-
       transition: transform 5s ease;
 
       &:hover {
