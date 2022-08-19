@@ -41,6 +41,7 @@ const Gallery = () => {
   const startTranslateXRef = useRef(0)
   const startScrollPageYRef = useRef(0)
   const currentTranslateXRef = useRef(0)
+  const multipleSwipeSpeedRef = useRef(1.5)
   const maxTranslateXRef = useRef<number | undefined>(undefined)
   const minTranslateXRef = useRef<number | undefined>(undefined)
   const gapElementsRef = useRef(15)
@@ -81,7 +82,7 @@ const Gallery = () => {
     const evt = getCurrentEvent(event)
 
     setTranslateX(prev =>
-      currentTranslateXRef.current - (startTranslateXRef.current - evt.clientX)
+      (currentTranslateXRef.current - (startTranslateXRef.current - evt.clientX) * multipleSwipeSpeedRef.current)
     )
   }
 
