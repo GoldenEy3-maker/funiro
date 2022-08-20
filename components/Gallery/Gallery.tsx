@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import React, { MouseEventHandler, TouchEventHandler, useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import { setStaticClasses } from '../../lib/classes.lib'
 

@@ -56,10 +56,12 @@
       &._ready {
         position: static;
 
-        height: 0px;
+        height: 0;
       }
 
       ._isSubmenuShow & {
+        position: static;
+
         opacity: 1;
         visibility: visible;
 
