@@ -1,8 +1,10 @@
 import Image from 'next/image'
 
-import { MouseEvent, TouchEvent, useEffect, useState } from 'react'
+import React, { MouseEventHandler, TouchEventHandler, useEffect, useState, useRef } from 'react'
 
 import { setStaticClasses } from '../../lib/classes.lib'
+
+import { useWindow } from '../../hooks/window.hook'
 
 import styles from '../../styles/modules/Gallery/Gallery.module.scss'
 
@@ -15,8 +17,10 @@ import Picture6 from '../../public/images/gallery6.jpg'
 import Picture7 from '../../public/images/gallery7.jpg'
 import Picture8 from '../../public/images/gallery8.jpg'
 import Picture9 from '../../public/images/gallery9.jpg'
-import { useRef } from 'react'
-import { useWindow } from '../../hooks/window.hook'
+
+type TReactEventHandlers = React.MouseEvent | React.TouchEvent
+
+type TEventHandlers = MouseEvent | TouchEvent | TReactEventHandlers
 
 const {
   gallery,
@@ -48,18 +52,44 @@ const Gallery = () => {
 
   const { windowWidth } = useWindow()
 
-  const isEventTouch = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => event.type.includes('touch')
+  const isEventTouch = (event: TEventHandlers) => event.type.includes('touch')
 
-  const getCurrentEvent = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+  const getCurrentEvent = (event: TEventHandlers) => {
     if (isEventTouch(event)) {
-      const evt = event as TouchEvent<HTMLDivElement>
+      const evt = event as TouchEvent
       return evt.changedTouches[0]
     }
 
-    return event as MouseEvent<HTMLDivElement>
+    return event as React.MouseEvent<HTMLDivElement>
   }
 
-  const swipeStartHandler = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+  const swipeActionHandler = (event: MouseEvent | TouchEvent) => {
+    if (isEventTouch(event) && (startScrollPageYRef.current > window.scrollY || startScrollPageYRef.current < window.scrollY)) return
+
+    const evt = getCurrentEvent(event)
+
+    setTranslateX(prev =>
+      (currentTranslateXRef.current - (startTranslateXRef.current - evt.clientX) * multipleSwipeSpeedRef.current)
+    )
+  }
+
+  const swipeEndHandler = () => {
+    setIsPressed(false)
+
+    setTranslateX(prev => {
+      if (maxTranslateXRef.current && prev <= maxTranslateXRef.current) return maxTranslateXRef.current
+      if (minTranslateXRef.current && prev >= minTranslateXRef.current) return minTranslateXRef.current
+
+      return prev
+    })
+
+    document.removeEventListener('mousemove', swipeActionHandler)
+    document.removeEventListener('mouseup', swipeEndHandler)
+    document.removeEventListener('touchmove', swipeActionHandler)
+    document.removeEventListener('touchend', swipeEndHandler)
+  }
+
+  const swipeStartHandler = (event: TReactEventHandlers) => {
     if (isListMoreThenWindow) return
 
     const evt = getCurrentEvent(event)
@@ -72,31 +102,11 @@ const Gallery = () => {
     if (isEventTouch(event)) {
       startScrollPageYRef.current = window.scrollY
     }
-  }
 
-  const swipeActionHandler = (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
-    if (isListMoreThenWindow) return
-    if (!isPressed) return
-    if (isEventTouch(event) && (startScrollPageYRef.current > window.scrollY || startScrollPageYRef.current < window.scrollY)) return
-
-    const evt = getCurrentEvent(event)
-
-    setTranslateX(prev =>
-      (currentTranslateXRef.current - (startTranslateXRef.current - evt.clientX) * multipleSwipeSpeedRef.current)
-    )
-  }
-
-  const swipeEndHandler = () => {
-    if (isListMoreThenWindow) return
-
-    setIsPressed(false)
-
-    setTranslateX(prev => {
-      if (maxTranslateXRef.current && prev <= maxTranslateXRef.current) return maxTranslateXRef.current
-      if (minTranslateXRef.current && prev >= minTranslateXRef.current) return minTranslateXRef.current
-
-      return prev
-    })
+    document.addEventListener('mousemove', swipeActionHandler)
+    document.addEventListener('mouseup', swipeEndHandler)
+    document.addEventListener('touchmove', swipeActionHandler)
+    document.addEventListener('touchend', swipeEndHandler)
   }
 
   useEffect(() => {
@@ -123,8 +133,8 @@ const Gallery = () => {
         <h3 className={ gallery__subtitle }>Share your setup with</h3>
         <h1 className={ setStaticClasses([gallery__title, '_section-title']) }>#FuniroFurniture</h1>
         <div className={ gallery__content } ref={ galleryContentRef } onMouseDown={ swipeStartHandler }
-             onMouseMove={ swipeActionHandler } onMouseUp={ swipeEndHandler } onTouchStart={ swipeStartHandler }
-             onTouchMove={ swipeActionHandler } onTouchEnd={ swipeEndHandler }>
+             onTouchStart={ swipeStartHandler }
+        >
           <ul className={ gallery__list } ref={ galleryListRef }
               style={ {
                 transform: `translateX(${ translateX }px)`,
